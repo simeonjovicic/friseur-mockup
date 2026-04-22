@@ -344,19 +344,30 @@
   #gallery .section-title { margin-bottom: 1.5rem; }
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     gap: 3px;
     height: calc(100vh - 16rem);
     padding: 0 3rem;
     max-width: 1100px;
     margin: 0 auto;
+    position: relative;
   }
   .gallery-item {
     background: var(--cream);
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
     min-height: 0;
+    will-change: transform, opacity;
+  }
+  /* First item takes full space initially */
+  .gallery-item:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  /* Other items overlay on top, hidden initially */
+  .gallery-item:not(:first-child) {
+    position: absolute;
     will-change: transform, opacity;
   }
   .gallery-item svg { width: 100%; height: 100%; }
@@ -746,8 +757,10 @@ function sectionProgress(id) {
   if (!el) return 0;
   const rect = el.getBoundingClientRect();
   const vh = window.innerHeight;
-  // 0 when bottom edge hits viewport bottom, 1 when top edge reaches top
-  return clamp01(1 - rect.top / vh);
+  // Starts at 0 when section top enters bottom of viewport
+  // Reaches 1 when section top is 30% from top of viewport
+  // This gives more scroll range for the animations to play out
+  return clamp01((vh - rect.top) / (vh * 0.7));
 }
 
 // Helper: stagger — maps progress to individual element progress with offset
@@ -787,34 +800,36 @@ function onScroll() {
 
     // -- PRICES: scroll-bound slide in from left/right --
     const pp = sectionProgress('prices');
-    // Labels
+    // Labels — start at 20% progress
     document.querySelectorAll('#prices .section-label').forEach(el => {
-      const p = clamp01(pp * 3);
+      const p = clamp01((pp - 0.2) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 20}px)`;
     });
     document.querySelectorAll('#prices .section-title').forEach(el => {
-      const p = clamp01((pp - 0.05) * 3);
+      const p = clamp01((pp - 0.25) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 30}px)`;
     });
-    // Price items
+    // Price items — start at 35% progress
     const leftItems = document.querySelectorAll('.prices-grid > div:first-child .price-item');
     leftItems.forEach((el, i) => {
-      const p = stagger(pp, i, leftItems.length, 0.5);
+      const adjusted = clamp01((pp - 0.35) / 0.6);
+      const p = stagger(adjusted, i, leftItems.length, 0.5);
       el.style.opacity = p;
       el.style.transform = `translateX(${(1 - p) * -80}px)`;
     });
     const rightItems = document.querySelectorAll('.prices-grid > div:last-child .price-item');
     rightItems.forEach((el, i) => {
-      const p = stagger(pp, i, rightItems.length, 0.5);
+      const adjusted = clamp01((pp - 0.35) / 0.6);
+      const p = stagger(adjusted, i, rightItems.length, 0.5);
       el.style.opacity = p;
       el.style.transform = `translateX(${(1 - p) * 80}px)`;
     });
     // CTA
     const ctaEl = document.getElementById('prices-cta');
     if (ctaEl) {
-      const p = clamp01((pp - 0.7) * 4);
+      const p = clamp01((pp - 0.8) * 5);
       ctaEl.style.opacity = p;
       ctaEl.style.transform = `translateY(${(1 - p) * 20}px)`;
     }
@@ -822,77 +837,107 @@ function onScroll() {
     // -- ABOUT: scroll-bound --
     const ap = sectionProgress('about');
     document.querySelectorAll('#about .section-label').forEach(el => {
-      const p = clamp01(ap * 3);
+      const p = clamp01((ap - 0.2) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 20}px)`;
     });
     document.querySelectorAll('#about .section-title').forEach(el => {
-      const p = clamp01((ap - 0.05) * 3);
+      const p = clamp01((ap - 0.25) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 30}px)`;
     });
     const aboutText = document.querySelector('.about-text');
     if (aboutText) {
-      const p = clamp01((ap - 0.1) * 2.5);
+      const p = clamp01((ap - 0.3) * 2);
       aboutText.style.opacity = p;
       aboutText.style.transform = `translateX(${(1 - p) * -60}px)`;
     }
     const aboutImg = document.querySelector('.about-img-placeholder');
     if (aboutImg) {
-      const p = clamp01((ap - 0.2) * 2.5);
+      const p = clamp01((ap - 0.4) * 2);
       aboutImg.style.opacity = p;
       aboutImg.style.transform = `translateX(${(1 - p) * 60}px)`;
     }
 
-    // -- GALLERY: scroll-bound, first item scales up big --
+    // -- GALLERY: big image first, then grid reveals --
     const gp = sectionProgress('gallery');
     document.querySelectorAll('#gallery .section-label').forEach(el => {
-      const p = clamp01(gp * 3);
+      const p = clamp01(gp * 2);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 20}px)`;
     });
     document.querySelectorAll('#gallery .section-title').forEach(el => {
-      const p = clamp01((gp - 0.05) * 3);
+      const p = clamp01((gp - 0.1) * 2);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 30}px)`;
     });
     const galleryItems = document.querySelectorAll('.gallery-item');
+    const grid = document.querySelector('.gallery-grid');
+    const gridW = grid ? grid.offsetWidth : 800;
+    const gridH = grid ? grid.offsetHeight : 400;
+    const cellW = (gridW - 6) / 3; // 3 cols, 3px gaps
+    const cellH = (gridH - 3) / 2;  // 2 rows
+
+    // Phase 1 (gp 0.2-0.5): first image fades in big
+    // Phase 2 (gp 0.5-1.0): first image shrinks to grid pos, others appear
+    const phase1 = clamp01((gp - 0.2) / 0.3);
+    const phase2 = clamp01((gp - 0.55) / 0.45);
+
     galleryItems.forEach((el, i) => {
-      const p = stagger(gp, i, galleryItems.length, 0.4);
       if (i === 0) {
-        // First photo: scales from small to slightly oversized
-        const scale = 0.4 + p * 0.68;
-        el.style.opacity = p;
-        el.style.transform = `scale(${scale})`;
-        el.style.boxShadow = p > 0.5 ? `0 0 ${p * 50}px oklch(0% 0 0 / ${p * 0.4})` : 'none';
-        el.style.zIndex = '1';
+        // First item: starts full size, then shrinks into top-left grid cell
+        el.style.opacity = phase1;
+        el.style.position = phase2 > 0 ? 'absolute' : 'relative';
+        if (phase2 > 0) {
+          const w = gridW - (gridW - cellW) * phase2;
+          const h = gridH - (gridH - cellH) * phase2;
+          el.style.width = w + 'px';
+          el.style.height = h + 'px';
+          el.style.top = '0';
+          el.style.left = '0';
+        } else {
+          el.style.width = '100%';
+          el.style.height = '100%';
+          el.style.position = 'relative';
+        }
+        el.style.zIndex = '2';
       } else {
-        el.style.opacity = p;
-        el.style.transform = `scale(${0.8 + p * 0.2})`;
+        // Other items: appear during phase 2 at their grid positions
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const itemP = stagger(phase2, i - 1, galleryItems.length - 1, 0.5);
+
+        el.style.opacity = itemP;
+        el.style.transform = `scale(${0.7 + itemP * 0.3})`;
+        el.style.width = cellW + 'px';
+        el.style.height = cellH + 'px';
+        el.style.top = (row * (cellH + 3)) + 'px';
+        el.style.left = (col * (cellW + 3)) + 'px';
+        el.style.zIndex = '1';
       }
     });
 
     // -- CONTACT: scroll-bound --
     const cp = sectionProgress('contact');
     document.querySelectorAll('#contact .section-label').forEach(el => {
-      const p = clamp01(cp * 3);
+      const p = clamp01((cp - 0.2) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 20}px)`;
     });
     document.querySelectorAll('#contact .section-title').forEach(el => {
-      const p = clamp01((cp - 0.05) * 3);
+      const p = clamp01((cp - 0.25) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 30}px)`;
     });
     const contactText = document.querySelector('.contact-text');
     if (contactText) {
-      const p = clamp01((cp - 0.1) * 2.5);
+      const p = clamp01((cp - 0.3) * 2);
       contactText.style.opacity = p;
       contactText.style.transform = `translateX(${(1 - p) * -60}px)`;
     }
     const contactBooking = document.querySelector('.contact-booking');
     if (contactBooking) {
-      const p = clamp01((cp - 0.2) * 2.5);
+      const p = clamp01((cp - 0.4) * 2);
       contactBooking.style.opacity = p;
       contactBooking.style.transform = `translateY(${(1 - p) * 60}px) scale(${0.95 + p * 0.05})`;
     }
