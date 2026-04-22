@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mister M — Friseur Wien</title>
+<title>City Barbershop — Friseur Wien</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
@@ -15,8 +15,8 @@
     --taupe-2: oklch(34% 0.022 52);
     --cream:   oklch(94% 0.012 65);
     --cream-2: oklch(90% 0.018 65);
-    --amber:   #ebebeb;
-    --amber-2: #d5d5d5;
+    --amber:   #c8a46e;
+    --amber-2: #b8944e;
     --text-light: oklch(97% 0.006 65);
     --text-dark:  oklch(18% 0.018 52);
     --divider: oklch(60% 0.02  55);
@@ -101,8 +101,9 @@
   #hero-title h1 {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 900;
-    font-size: clamp(4.5rem, 11vw, 13rem);
+    font-size: clamp(3rem, 7.5vw, 9rem);
     line-height: 0.88;
+    white-space: nowrap;
     text-transform: uppercase;
     color: var(--text-light);
     letter-spacing: -0.02em;
@@ -137,7 +138,8 @@
   #hero-price-list {
     position: absolute;
     right: 3.5rem;
-    bottom: 8vh;
+    top: 50%;
+    transform: translateY(-50%) translateX(120px);
     width: 36%;
     min-width: 280px;
     z-index: 3;
@@ -157,7 +159,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding: 0.85rem 0;
+    padding: 1.1rem 0;
     border-top: 1px solid oklch(100% 0 0 / 0.1);
     color: var(--text-light);
   }
@@ -339,19 +341,15 @@
   #gallery {
     background: oklch(42% 0.024 52);
   }
-  #gallery .section-label,
-  #gallery .section-title { margin-left: 3rem; }
-  #gallery .section-title { margin-bottom: 1.5rem; }
+  .gallery-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 3rem;
+  }
   .gallery-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
     gap: 3px;
-    height: calc(100vh - 16rem);
-    padding: 0 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
+    height: calc(100vh - 18rem);
   }
   .gallery-item {
     background: var(--cream);
@@ -360,18 +358,171 @@
     min-height: 0;
     will-change: transform, opacity;
   }
-  /* First item takes full space initially */
-  .gallery-item:first-child {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  /* Other items overlay on top, hidden initially */
-  .gallery-item:not(:first-child) {
-    position: absolute;
-    will-change: transform, opacity;
-  }
   .gallery-item svg { width: 100%; height: 100%; }
   .gallery-item span { position: absolute; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: oklch(60% 0.02 52); }
+
+  /* -- REVIEWS -- */
+  #reviews {
+    background: oklch(46% 0.024 52);
+  }
+  .reviews-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 3rem;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 1rem;
+  }
+  .review-card {
+    background: oklch(42% 0.022 52);
+    padding: 1.5rem;
+    will-change: transform, opacity;
+  }
+  .review-header {
+    display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .review-avatar {
+    width: 38px; height: 38px;
+    background: oklch(55% 0.025 52);
+    color: var(--text-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-weight: 500; font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .review-date {
+    font-size: 0.68rem; color: oklch(58% 0.02 52);
+    font-weight: 300;
+  }
+  .review-stars {
+    margin-left: auto;
+    color: oklch(75% 0.12 80);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+  .review-text {
+    font-size: 0.88rem; font-weight: 300;
+    color: oklch(78% 0.015 60);
+    line-height: 1.6;
+  }
+  .reviews-cta {
+    text-align: center;
+    margin-top: 2.5rem;
+    will-change: transform, opacity;
+  }
+
+  /* -- STANDORTE -- */
+  #standorte-wrapper {
+    height: 250vh;
+    position: relative;
+    background: oklch(36% 0.023 52);
+  }
+  #standorte {
+    background: oklch(36% 0.023 52);
+    overflow: hidden;
+  }
+  .standorte-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 3rem;
+    height: calc(100vh - 10rem);
+    display: flex; flex-direction: column;
+  }
+  .standorte-carousel {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+  .standort-card {
+    position: absolute;
+    inset: 0;
+    background: oklch(42% 0.024 52);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    will-change: transform, opacity;
+  }
+  .standort-img {
+    background: oklch(48% 0.025 52);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .standort-img svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+  .standort-img span {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: oklch(58% 0.02 52); position: relative; z-index: 1;
+  }
+  .standort-badge {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--text-dark);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    position: absolute;
+    top: 1rem; left: 1rem;
+    z-index: 2;
+  }
+  .standort-body {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .standort-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    text-transform: uppercase;
+    color: var(--text-light);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .standort-info {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: oklch(78% 0.015 60);
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+  .standort-info strong {
+    display: block;
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+    margin-top: 1rem;
+  }
+  .standort-info strong:first-child { margin-top: 0; }
+  .standort-cta {
+    margin-top: 2rem;
+  }
+  .standort-dots {
+    display: flex; gap: 0.5rem;
+    justify-content: center;
+    padding: 1.2rem 0 0;
+  }
+  .standort-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: oklch(55% 0.02 52);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .standort-dot.active {
+    background: var(--amber);
+    transform: scale(1.3);
+  }
 
   /* -- CONTACT -- */
   #contact {
@@ -457,11 +608,12 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a href="#hero" class="nav-logo">MISTER <span>M</span></a>
+  <a href="#hero" class="nav-logo">CITY <span>BARBERSHOP</span></a>
   <ul class="nav-links">
     <li><a href="#about">Über uns</a></li>
     <li><a href="#prices">Preise</a></li>
     <li><a href="#gallery">Galerie</a></li>
+    <li><a href="#standorte">Standorte</a></li>
     <li><a href="#contact">Kontakt</a></li>
     <li><a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" style="color:var(--amber);opacity:1;">Termin buchen</a></li>
   </ul>
@@ -484,11 +636,11 @@
 <!-- HERO -->
 <section id="hero">
   <div id="hero-title">
-    <h1>MISTER M</h1>
-    <p class="hero-tagline">Premium Friseur · Wien</p>
+    <h1>CITY BARBERSHOP</h1>
+    <p class="hero-tagline">Dein Friseur in Wien · 2 Standorte</p>
   </div>
 
-  <img id="hero-face" src="hero.png" alt="Mister M Friseur" />
+  <img id="hero-face" src="hero.png" alt="City Barbershop" />
 
   <div id="hero-price-list">
     <p class="hero-prices-label">Ausgewählte Preise</p>
@@ -632,7 +784,7 @@
     <div class="about-text">
       <p class="section-label">Über uns</p>
       <h2 class="section-title">Stil.<br>Handwerk.<br>Charakter.</h2>
-      <p>Bei Mister M dreht sich alles um Präzision, Persönlichkeit und das richtige Gefühl nach jedem Schnitt. Unser Team verbindet klassisches Friseurhandwerk mit modernem Style.</p>
+      <p>Bei City Barbershop dreht sich alles um Präzision, Persönlichkeit und das richtige Gefühl nach jedem Schnitt. Unser Team verbindet klassisches Friseurhandwerk mit modernem Style.</p>
       <p>Wir nehmen uns Zeit für jeden Kunden — denn ein guter Haarschnitt fängt mit einem guten Gespräch an.</p>
       <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" class="btn-book" style="display:inline-flex; margin-top:1rem;">Termin buchen →</a>
     </div>
@@ -653,19 +805,157 @@
 </section>
 
 <!-- GALLERY -->
-<div id="gallery-wrapper" style="height: 300vh; position: relative;">
-  <section id="gallery" class="sticky-section" style="top: 0; min-height: 100vh;">
-      <p class="section-label">Unsere Arbeit</p>
-      <h2 class="section-title">Galerie</h2>
-      <div class="gallery-grid">
+<section id="gallery" class="sticky-section">
+  <div class="gallery-inner">
+    <p class="section-label">Unsere Arbeit</p>
+    <h2 class="section-title">Galerie</h2>
+    <div class="gallery-grid">
         <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(88% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(80% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(80% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(80% 0.018 62)" stroke-width="1"/></svg><span>Foto 1</span></div>
         <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(86% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(78% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(78% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(78% 0.018 62)" stroke-width="1"/></svg><span>Foto 2</span></div>
         <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(90% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(82% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(82% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(82% 0.018 62)" stroke-width="1"/></svg><span>Foto 3</span></div>
         <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(87% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(79% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(79% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(79% 0.018 62)" stroke-width="1"/></svg><span>Foto 4</span></div>
         <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(89% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(81% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1"/></svg><span>Foto 5</span></div>
         <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(85% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(77% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1"/></svg><span>Foto 6</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="sticky-section">
+  <div class="reviews-inner">
+    <p class="section-label">Kundenstimmen</p>
+    <h2 class="section-title">Was unsere<br>Kunden sagen</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Markus W.</div>
+            <div class="review-date">2026-03-15</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <p class="review-text">Bester Friseur in Wien! Sehr professionell und das Ergebnis war genau so wie ich es wollte. Komme definitiv wieder.</p>
       </div>
-  </section>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">S</div>
+          <div>
+            <div class="review-name">Stefan K.</div>
+            <div class="review-date">2026-03-08</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <p class="review-text">Top Service, super freundlich und die Rasur war perfekt. Absolut empfehlenswert!</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">A</div>
+          <div>
+            <div class="review-name">Alexander M.</div>
+            <div class="review-date">2026-02-22</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <p class="review-text">Sehr guter Haarschnitt, nettes Team. Die Atmosphäre ist entspannt und man fühlt sich sofort wohl.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">D</div>
+          <div>
+            <div class="review-name">David R.</div>
+            <div class="review-date">2026-02-10</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+        <p class="review-text">Tolles Handwerk und faire Preise. Mein Stammfriseur seit einem Jahr!</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">T</div>
+          <div>
+            <div class="review-name">Thomas H.</div>
+            <div class="review-date">2026-01-28</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <p class="review-text">Fullservice gebucht und es war jeden Cent wert. Schnitt, Rasur und Styling auf höchstem Niveau.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">E</div>
+          <div>
+            <div class="review-name">Elias B.</div>
+            <div class="review-date">2026-01-15</div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <p class="review-text">Immer pünktlich, immer freundlich, immer ein perfektes Ergebnis. Was will man mehr?</p>
+      </div>
+    </div>
+    <div class="reviews-cta">
+      <a href="https://www.google.com/search?q=mister+m+friseur+wien+bewertungen" target="_blank" class="btn-book">Bewertung schreiben &#9998;</a>
+    </div>
+  </div>
+</section>
+
+<!-- STANDORTE -->
+<div id="standorte-wrapper">
+<section id="standorte" class="sticky-section">
+  <div class="standorte-inner">
+    <p class="section-label">Zwei Standorte</p>
+    <h2 class="section-title">Besuch uns.</h2>
+    <div class="standorte-carousel">
+
+      <div class="standort-card" id="standort-1">
+        <div class="standort-img">
+          <div class="standort-badge">Standort 1</div>
+          <svg viewBox="0 0 600 500"><rect width="600" height="500" fill="oklch(48% 0.025 52)"/><line x1="0" y1="0" x2="600" y2="500" stroke="oklch(52% 0.022 52)" stroke-width="1"/><line x1="200" y1="0" x2="600" y2="333" stroke="oklch(52% 0.022 52)" stroke-width="1"/></svg>
+          <span>Foto Standort 1</span>
+        </div>
+        <div class="standort-body">
+          <div class="standort-name">City<br>Barbershop</div>
+          <div class="standort-info">
+            <strong>Adresse</strong>
+            Musterstraße 1, 1010 Wien
+            <strong>Öffnungszeiten</strong>
+            Mo – Fr: 09:00 – 19:00 Uhr<br>
+            Sa: 09:00 – 17:00 Uhr
+          </div>
+          <div class="standort-cta">
+            <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" class="btn-book">Termin buchen →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="standort-card" id="standort-2">
+        <div class="standort-img">
+          <div class="standort-badge">Standort 2</div>
+          <svg viewBox="0 0 600 500"><rect width="600" height="500" fill="oklch(48% 0.025 52)"/><line x1="0" y1="0" x2="600" y2="500" stroke="oklch(52% 0.022 52)" stroke-width="1"/><line x1="200" y1="0" x2="600" y2="333" stroke="oklch(52% 0.022 52)" stroke-width="1"/></svg>
+          <span>Foto Standort 2</span>
+        </div>
+        <div class="standort-body">
+          <div class="standort-name">City<br>Barbershop 2</div>
+          <div class="standort-info">
+            <strong>Adresse</strong>
+            Musterstraße 2, 1030 Wien
+            <strong>Öffnungszeiten</strong>
+            Mo – Fr: 09:00 – 19:00 Uhr<br>
+            Sa: 09:00 – 17:00 Uhr
+          </div>
+          <div class="standort-cta">
+            <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" class="btn-book">Termin buchen →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="standort-dots">
+      <div class="standort-dot active" id="dot-1"></div>
+      <div class="standort-dot" id="dot-2"></div>
+    </div>
+  </div>
+</section>
 </div>
 
 <!-- CONTACT -->
@@ -723,7 +1013,7 @@
 <!-- FOOTER -->
 </div><!-- /content -->
 <footer style="position:relative;z-index:1;">
-  <p>&copy; 2026 Mister M — Friseur Wien</p>
+  <p>&copy; 2026 City Barbershop — Friseur Wien</p>
   <p><a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank">Termin buchen</a></p>
 </footer>
 
@@ -745,7 +1035,7 @@ requestAnimationFrame(() => {
   requestAnimationFrame(() => {
     if (heroTitle) { applyTransition(heroTitle, 0.1); heroTitle.style.opacity = '1'; heroTitle.style.transform = 'translateY(0)'; }
     if (heroFace) { applyTransition(heroFace, 0.2); heroFace.style.opacity = '1'; heroFace.style.transform = 'translateX(0)'; }
-    if (heroPriceList) { applyTransition(heroPriceList, 0.35); heroPriceList.style.opacity = '1'; heroPriceList.style.transform = 'translateX(0)'; }
+    if (heroPriceList) { applyTransition(heroPriceList, 0.35); heroPriceList.style.opacity = '1'; heroPriceList.style.transform = 'translateY(-50%) translateX(0)'; }
   });
 });
 
@@ -759,10 +1049,10 @@ function sectionProgress(id) {
   if (!el) return 0;
   const rect = el.getBoundingClientRect();
   const vh = window.innerHeight;
-  // Starts at 0 when section top enters bottom of viewport
-  // Reaches 1 when section top is 30% from top of viewport
-  // This gives more scroll range for the animations to play out
-  return clamp01((vh - rect.top) / (vh * 0.7));
+  // Starts at 0 when section top is at 60% of viewport height
+  // Reaches 1 when section top hits the top of viewport
+  // Animations only begin once the section is well in view
+  return clamp01((vh * 0.6 - rect.top) / (vh * 0.6));
 }
 
 // Helper: stagger — maps progress to individual element progress with offset
@@ -791,7 +1081,7 @@ function onScroll() {
     }
     if (heroPriceList) {
       heroPriceList.style.transition = noTrans;
-      heroPriceList.style.transform = `translateX(${progress * 60}px)`;
+      heroPriceList.style.transform = `translateY(-50%) translateX(${progress * 60}px)`;
       heroPriceList.style.opacity = Math.max(0, 1 - progress * 1.2);
     }
     if (heroTitle) {
@@ -861,75 +1151,98 @@ function onScroll() {
       aboutImg.style.transform = `translateX(${(1 - p) * 60}px)`;
     }
 
-    // -- GALLERY: big image first, then grid reveals via sticky scroll --
-    const gw = document.getElementById('gallery-wrapper');
-    const gwRect = gw ? gw.getBoundingClientRect() : { top: 0, height: window.innerHeight * 3 };
-    const gp_enter = clamp01((window.innerHeight - gwRect.top) / (window.innerHeight * 0.8));
-    
-    // gp_sticky goes from 0 to 1 while the wrapper is sticky
-    const scrollDistance = (gw ? gw.offsetHeight : window.innerHeight * 3) - window.innerHeight;
-    const gp_sticky = scrollDistance > 0 ? clamp01(-gwRect.top / scrollDistance) : 0;
-
+    // -- GALLERY: scroll-bound, first item scales up --
+    const gp = sectionProgress('gallery');
     document.querySelectorAll('#gallery .section-label').forEach(el => {
-      const p = clamp01(gp_enter * 2);
+      const p = clamp01((gp - 0.25) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 20}px)`;
     });
     document.querySelectorAll('#gallery .section-title').forEach(el => {
-      const p = clamp01((gp_enter - 0.1) * 2);
+      const p = clamp01((gp - 0.3) * 2.5);
       el.style.opacity = p;
       el.style.transform = `translateY(${(1 - p) * 30}px)`;
     });
     const galleryItems = document.querySelectorAll('.gallery-item');
-    const grid = document.querySelector('.gallery-grid');
-    const gridW = grid ? grid.offsetWidth : 800;
-    const gridH = grid ? grid.offsetHeight : 400;
-    
-    // Calculate cols/rows based on mobile width breakpoint
-    const isMobile = window.innerWidth <= 768;
-    const cols = isMobile ? 2 : 3;
-    const rows = isMobile ? 3 : 2;
-    const cellW = (gridW - (cols - 1) * 3) / cols;
-    const cellH = (gridH - (rows - 1) * 3) / rows;
-
-    // Phase 1 (entrance): first image fades in big
-    const phase1 = clamp01((gp_enter - 0.2) / 0.5);
-    // Phase 2 (sticky scroll): shrink first image, fade in others
-    const phase2 = clamp01((gp_sticky - 0.1) / 0.7);
-
     galleryItems.forEach((el, i) => {
+      const adjusted = clamp01((gp - 0.35) / 0.6);
+      const p = stagger(adjusted, i, galleryItems.length, 0.5);
       if (i === 0) {
-        // First item: starts full size, then shrinks into top-left grid cell
-        el.style.opacity = phase1;
-        el.style.position = phase2 > 0 ? 'absolute' : 'relative';
-        if (phase2 > 0) {
-          const w = gridW - (gridW - cellW) * phase2;
-          const h = gridH - (gridH - cellH) * phase2;
-          el.style.width = w + 'px';
-          el.style.height = h + 'px';
-          el.style.top = '0';
-          el.style.left = '0';
-        } else {
-          el.style.width = '100%';
-          el.style.height = '100%';
-          el.style.position = 'relative';
-        }
-        el.style.zIndex = '2';
+        el.style.opacity = p;
+        el.style.transform = `scale(${0.5 + p * 0.5})`;
       } else {
-        // Other items: appear during phase 2 at their grid positions
-        const col = i % cols;
-        const row = Math.floor(i / cols);
-        const itemP = stagger(phase2, i - 1, galleryItems.length - 1, 0.5);
-
-        el.style.opacity = itemP;
-        el.style.transform = `scale(${0.7 + itemP * 0.3})`;
-        el.style.width = cellW + 'px';
-        el.style.height = cellH + 'px';
-        el.style.top = (row * (cellH + 3)) + 'px';
-        el.style.left = (col * (cellW + 3)) + 'px';
-        el.style.zIndex = '1';
+        el.style.opacity = p;
+        el.style.transform = `scale(${0.8 + p * 0.2})`;
       }
     });
+
+    // -- REVIEWS: scroll-bound --
+    const rp = sectionProgress('reviews');
+    document.querySelectorAll('#reviews .section-label').forEach(el => {
+      const p = clamp01((rp - 0.25) * 2.5);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 20}px)`;
+    });
+    document.querySelectorAll('#reviews .section-title').forEach(el => {
+      const p = clamp01((rp - 0.3) * 2.5);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 30}px)`;
+    });
+    const reviewCards = document.querySelectorAll('.review-card');
+    reviewCards.forEach((el, i) => {
+      const adjusted = clamp01((rp - 0.35) / 0.6);
+      const p = stagger(adjusted, i, reviewCards.length, 0.5);
+      // Alternate: odd from left, even from right
+      const dir = i % 2 === 0 ? -1 : 1;
+      el.style.opacity = p;
+      el.style.transform = `translateX(${(1 - p) * dir * 60}px)`;
+    });
+    const reviewsCta = document.querySelector('.reviews-cta');
+    if (reviewsCta) {
+      const p = clamp01((rp - 0.8) * 5);
+      reviewsCta.style.opacity = p;
+      reviewsCta.style.transform = `translateY(${(1 - p) * 20}px)`;
+    }
+
+    // -- STANDORTE: scroll-driven carousel --
+    const sw = document.getElementById('standorte-wrapper');
+    const swRect = sw ? sw.getBoundingClientRect() : { top: 0, height: window.innerHeight * 2.5 };
+    const sp_enter = clamp01((window.innerHeight - swRect.top) / (window.innerHeight * 0.6));
+    const swScrollDist = (sw ? sw.offsetHeight : window.innerHeight * 2.5) - window.innerHeight;
+    const sp_slide = swScrollDist > 0 ? clamp01(-swRect.top / swScrollDist) : 0;
+
+    document.querySelectorAll('#standorte .section-label').forEach(el => {
+      const p = clamp01((sp_enter - 0.3) * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 20}px)`;
+    });
+    document.querySelectorAll('#standorte .section-title').forEach(el => {
+      const p = clamp01((sp_enter - 0.4) * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 30}px)`;
+    });
+
+    // Card 1: starts visible, slides out left
+    const card1 = document.getElementById('standort-1');
+    const card2 = document.getElementById('standort-2');
+    const dot1 = document.getElementById('dot-1');
+    const dot2 = document.getElementById('dot-2');
+    if (card1 && card2) {
+      const enterP = clamp01((sp_enter - 0.4) * 2.5);
+      // Carousel transition happens in middle of sticky scroll
+      const slide = clamp01((sp_slide - 0.25) / 0.5);
+
+      card1.style.opacity = enterP;
+      card1.style.transform = `translateX(${-slide * 100}%)`;
+
+      card2.style.opacity = slide;
+      card2.style.transform = `translateX(${(1 - slide) * 100}%)`;
+
+      if (dot1 && dot2) {
+        dot1.classList.toggle('active', slide < 0.5);
+        dot2.classList.toggle('active', slide >= 0.5);
+      }
+    }
 
     // -- CONTACT: scroll-bound --
     const cp = sectionProgress('contact');
