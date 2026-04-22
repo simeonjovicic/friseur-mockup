@@ -214,12 +214,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   /* -- PREISE SECTION -- */
   #prices {
     background: oklch(44% 0.025 52);
-    padding: 7rem 0 6rem;
     overflow: hidden;
   }
   .prices-inner {
@@ -233,6 +234,7 @@
     text-transform: uppercase;
     color: var(--amber);
     margin-bottom: 0.8rem;
+    will-change: transform, opacity;
   }
   .section-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -242,6 +244,7 @@
     text-transform: uppercase;
     color: var(--text-light);
     margin-bottom: 3.5rem;
+    will-change: transform, opacity;
   }
   .prices-grid {
     display: grid;
@@ -254,13 +257,7 @@
     align-items: baseline;
     padding: 1rem 0;
     border-bottom: 1px solid oklch(100% 0 0 / 0.12);
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.5s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .price-item.visible {
-    opacity: 1;
-    transform: translateY(0);
+    will-change: transform, opacity;
   }
   .price-item.featured {
     background: var(--taupe);
@@ -296,16 +293,12 @@
   .prices-cta {
     text-align: center;
     margin-top: 4rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s 0.4s, transform 0.6s 0.4s;
+    will-change: transform, opacity;
   }
-  .prices-cta.visible { opacity: 1; transform: translateY(0); }
 
   /* -- ABOUT -- */
   #about {
     background: oklch(38% 0.024 52);
-    padding: 7rem 0;
     overflow: hidden;
   }
   .about-inner {
@@ -333,49 +326,45 @@
     padding: 1rem;
     overflow: hidden;
     position: relative;
-    opacity: 0; transform: translateX(40px);
-    transition: opacity 0.7s, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    will-change: transform, opacity;
   }
-  .about-img-placeholder.visible { opacity: 1; transform: translateX(0); }
   .about-img-placeholder svg { position: absolute; inset: 0; width: 100%; height: 100%; }
   .about-img-placeholder span {
     font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
     color: oklch(58% 0.02 52); position: relative; z-index: 1;
   }
-  .about-text { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s 0.15s, transform 0.7s 0.15s cubic-bezier(0.22,1,0.36,1); }
-  .about-text.visible { opacity: 1; transform: translateX(0); }
+  .about-text { will-change: transform, opacity; }
 
   /* -- GALLERY -- */
   #gallery {
     background: oklch(42% 0.024 52);
-    padding: 7rem 0;
   }
-  .gallery-inner {
-    max-width: 1100px; margin: 0 auto; padding: 0 3rem;
-  }
+  #gallery .section-label,
+  #gallery .section-title { margin-left: 3rem; }
+  #gallery .section-title { margin-bottom: 1.5rem; }
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    margin-top: 3rem;
-    background: oklch(78% 0.015 60);
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+    height: calc(100vh - 16rem);
+    padding: 0 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
   }
   .gallery-item {
-    aspect-ratio: 1;
     background: var(--cream);
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
-    opacity: 0; transform: scale(0.95);
-    transition: opacity 0.5s, transform 0.5s;
+    min-height: 0;
+    will-change: transform, opacity;
   }
-  .gallery-item.visible { opacity: 1; transform: scale(1); }
   .gallery-item svg { width: 100%; height: 100%; }
   .gallery-item span { position: absolute; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: oklch(60% 0.02 52); }
 
   /* -- CONTACT -- */
   #contact {
     background: oklch(34% 0.022 52);
-    padding: 7rem 0;
   }
   .contact-inner {
     max-width: 1100px; margin: 0 auto; padding: 0 3rem;
@@ -410,6 +399,7 @@
     background: var(--taupe);
     padding: 3rem;
     display: flex; flex-direction: column; gap: 1.5rem;
+    will-change: transform, opacity;
   }
   .contact-booking h3 {
     font-family: 'Barlow Condensed', sans-serif;
@@ -418,6 +408,19 @@
     color: var(--text-light);
   }
   .contact-booking p { font-size: 0.9rem; font-weight: 300; color: oklch(72% 0.018 60); line-height: 1.6; }
+
+  /* -- GLOW PULSE on booking button -- */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 8px oklch(80% 0.02 55 / 0.3), 0 0 20px oklch(70% 0.03 55 / 0.15); }
+    50%      { box-shadow: 0 0 18px oklch(85% 0.03 55 / 0.5), 0 0 45px oklch(75% 0.04 55 / 0.25); }
+  }
+  .contact-booking .btn-book {
+    animation: glowPulse 2.5s ease-in-out infinite;
+  }
+
+  .contact-text {
+    will-change: transform, opacity;
+  }
 
   /* -- FOOTER -- */
   footer {
@@ -640,7 +643,6 @@
 
 <!-- GALLERY -->
 <section id="gallery" class="sticky-section">
-  <div class="gallery-inner">
     <p class="section-label">Unsere Arbeit</p>
     <h2 class="section-title">Galerie</h2>
     <div class="gallery-grid">
@@ -651,7 +653,6 @@
       <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(89% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(81% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1"/></svg><span>Foto 5</span></div>
       <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(85% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(77% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1"/></svg><span>Foto 6</span></div>
     </div>
-  </div>
 </section>
 
 <!-- CONTACT -->
@@ -736,69 +737,170 @@ requestAnimationFrame(() => {
 });
 
 // -- Scroll animations --
-let ticking = false;
+// Helper: clamp 0-1
+function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+// Helper: get how far a section has scrolled into view (0 = just entering, 1 = fully in)
+function sectionProgress(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const rect = el.getBoundingClientRect();
+  const vh = window.innerHeight;
+  // 0 when bottom edge hits viewport bottom, 1 when top edge reaches top
+  return clamp01(1 - rect.top / vh);
+}
+
+// Helper: stagger — maps progress to individual element progress with offset
+function stagger(progress, index, total, spread) {
+  spread = spread || 0.6;
+  const start = (index / total) * spread;
+  return clamp01((progress - start) / (1 - spread));
+}
+
 function onScroll() {
-  if (ticking) return;
-  ticking = true;
   requestAnimationFrame(() => {
     const scrollY = window.scrollY;
     const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
-    const progress = Math.min(scrollY / (heroH * 0.45), 1);
+    // Hero fades much slower — content stays until 85% scrolled past
+    const progress = clamp01(scrollY / (heroH * 0.85));
 
     // Nav
-    if (scrollY > heroH * 0.12) { nav.classList.add('visible'); nav.classList.toggle('solid', scrollY > heroH * 0.35); }
+    if (scrollY > heroH * 0.15) { nav.classList.add('visible'); nav.classList.toggle('solid', scrollY > heroH * 0.4); }
     else nav.classList.remove('visible', 'solid');
 
-    if (progress > 0) {
-      const noTrans = 'opacity 0s, transform 0s';
-      // Face slides left
-      if (heroFace) {
-        heroFace.style.transition = noTrans;
-        heroFace.style.transform = `translateX(${progress * -14}%)`;
-        heroFace.style.opacity = Math.max(0, 1 - progress * 1.5);
-      }
-      // Prices slide right
-      if (heroPriceList) {
-        heroPriceList.style.transition = noTrans;
-        heroPriceList.style.transform = `translateX(${progress * 90}px)`;
-        heroPriceList.style.opacity = Math.max(0, 1 - progress * 1.5);
-      }
-      // Title fades up
-      if (heroTitle) {
-        heroTitle.style.transition = noTrans;
-        heroTitle.style.transform = `translateY(${progress * -45}px)`;
-        heroTitle.style.opacity = Math.max(0, 1 - progress * 1.6);
-      }
+    const noTrans = 'opacity 0s, transform 0s';
+    if (heroFace) {
+      heroFace.style.transition = noTrans;
+      heroFace.style.transform = `translateX(${progress * -10}%)`;
+      heroFace.style.opacity = Math.max(0, 1 - progress * 1.2);
     }
-    ticking = false;
+    if (heroPriceList) {
+      heroPriceList.style.transition = noTrans;
+      heroPriceList.style.transform = `translateX(${progress * 60}px)`;
+      heroPriceList.style.opacity = Math.max(0, 1 - progress * 1.2);
+    }
+    if (heroTitle) {
+      heroTitle.style.transition = noTrans;
+      heroTitle.style.transform = `translateY(${progress * -30}px)`;
+      heroTitle.style.opacity = Math.max(0, 1 - progress * 1.3);
+    }
+
+    // -- PRICES: scroll-bound slide in from left/right --
+    const pp = sectionProgress('prices');
+    // Labels
+    document.querySelectorAll('#prices .section-label').forEach(el => {
+      const p = clamp01(pp * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 20}px)`;
+    });
+    document.querySelectorAll('#prices .section-title').forEach(el => {
+      const p = clamp01((pp - 0.05) * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 30}px)`;
+    });
+    // Price items
+    const leftItems = document.querySelectorAll('.prices-grid > div:first-child .price-item');
+    leftItems.forEach((el, i) => {
+      const p = stagger(pp, i, leftItems.length, 0.5);
+      el.style.opacity = p;
+      el.style.transform = `translateX(${(1 - p) * -80}px)`;
+    });
+    const rightItems = document.querySelectorAll('.prices-grid > div:last-child .price-item');
+    rightItems.forEach((el, i) => {
+      const p = stagger(pp, i, rightItems.length, 0.5);
+      el.style.opacity = p;
+      el.style.transform = `translateX(${(1 - p) * 80}px)`;
+    });
+    // CTA
+    const ctaEl = document.getElementById('prices-cta');
+    if (ctaEl) {
+      const p = clamp01((pp - 0.7) * 4);
+      ctaEl.style.opacity = p;
+      ctaEl.style.transform = `translateY(${(1 - p) * 20}px)`;
+    }
+
+    // -- ABOUT: scroll-bound --
+    const ap = sectionProgress('about');
+    document.querySelectorAll('#about .section-label').forEach(el => {
+      const p = clamp01(ap * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 20}px)`;
+    });
+    document.querySelectorAll('#about .section-title').forEach(el => {
+      const p = clamp01((ap - 0.05) * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 30}px)`;
+    });
+    const aboutText = document.querySelector('.about-text');
+    if (aboutText) {
+      const p = clamp01((ap - 0.1) * 2.5);
+      aboutText.style.opacity = p;
+      aboutText.style.transform = `translateX(${(1 - p) * -60}px)`;
+    }
+    const aboutImg = document.querySelector('.about-img-placeholder');
+    if (aboutImg) {
+      const p = clamp01((ap - 0.2) * 2.5);
+      aboutImg.style.opacity = p;
+      aboutImg.style.transform = `translateX(${(1 - p) * 60}px)`;
+    }
+
+    // -- GALLERY: scroll-bound, first item scales up big --
+    const gp = sectionProgress('gallery');
+    document.querySelectorAll('#gallery .section-label').forEach(el => {
+      const p = clamp01(gp * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 20}px)`;
+    });
+    document.querySelectorAll('#gallery .section-title').forEach(el => {
+      const p = clamp01((gp - 0.05) * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 30}px)`;
+    });
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach((el, i) => {
+      const p = stagger(gp, i, galleryItems.length, 0.4);
+      if (i === 0) {
+        // First photo: scales from small to slightly oversized
+        const scale = 0.4 + p * 0.68;
+        el.style.opacity = p;
+        el.style.transform = `scale(${scale})`;
+        el.style.boxShadow = p > 0.5 ? `0 0 ${p * 50}px oklch(0% 0 0 / ${p * 0.4})` : 'none';
+        el.style.zIndex = '1';
+      } else {
+        el.style.opacity = p;
+        el.style.transform = `scale(${0.8 + p * 0.2})`;
+      }
+    });
+
+    // -- CONTACT: scroll-bound --
+    const cp = sectionProgress('contact');
+    document.querySelectorAll('#contact .section-label').forEach(el => {
+      const p = clamp01(cp * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 20}px)`;
+    });
+    document.querySelectorAll('#contact .section-title').forEach(el => {
+      const p = clamp01((cp - 0.05) * 3);
+      el.style.opacity = p;
+      el.style.transform = `translateY(${(1 - p) * 30}px)`;
+    });
+    const contactText = document.querySelector('.contact-text');
+    if (contactText) {
+      const p = clamp01((cp - 0.1) * 2.5);
+      contactText.style.opacity = p;
+      contactText.style.transform = `translateX(${(1 - p) * -60}px)`;
+    }
+    const contactBooking = document.querySelector('.contact-booking');
+    if (contactBooking) {
+      const p = clamp01((cp - 0.2) * 2.5);
+      contactBooking.style.opacity = p;
+      contactBooking.style.transform = `translateY(${(1 - p) * 60}px) scale(${0.95 + p * 0.05})`;
+    }
   });
 }
 
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
-
-// IntersectionObserver for animated entrances
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.15 });
-
-// Stagger price items
-const priceItems = document.querySelectorAll('.price-item');
-priceItems.forEach((item, i) => {
-  item.style.transitionDelay = `${i * 0.055}s`;
-  observer.observe(item);
-});
-observer.observe(document.getElementById('prices-cta'));
-
-// About + gallery
-document.querySelectorAll('.about-text, .about-img-placeholder, .gallery-item').forEach((el, i) => {
-  if (el.classList.contains('gallery-item')) el.style.transitionDelay = `${i * 0.08}s`;
-  observer.observe(el);
-});
 </script>
 </body>
 </html>
