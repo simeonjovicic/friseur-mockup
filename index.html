@@ -76,11 +76,19 @@
 
   /* -- HERO -- */
   #hero {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 100vh;
     min-height: 650px;
     background: var(--taupe);
     overflow: hidden;
+    z-index: 0;
+  }
+  #hero-spacer {
+    height: 100vh;
+    min-height: 650px;
   }
 
   #hero-title {
@@ -193,6 +201,12 @@
   .scroll-down-arrow span { display: block; width: 1px; height: 32px; background: var(--text-light); }
   .scroll-down-arrow svg { width: 12px; height: 8px; }
   @keyframes arrowBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  /* -- CONTENT OVER HERO -- */
+  #content {
+    position: relative;
+    z-index: 1;
+  }
 
   /* -- PREISE SECTION -- */
   #prices {
@@ -478,6 +492,9 @@
   </div>
 </section>
 
+<div id="hero-spacer"></div>
+<div id="content">
+
 <!-- FULL PRICES -->
 <section id="prices">
   <div class="prices-inner">
@@ -682,7 +699,8 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
+</div><!-- /content -->
+<footer style="position:relative;z-index:1;">
   <p>&copy; 2026 Mister M — Friseur Wien</p>
   <p><a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank">Termin buchen</a></p>
 </footer>
