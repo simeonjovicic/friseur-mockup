@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mister M — Friseur Wien</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --taupe:   oklch(40% 0.025 52);
+    --taupe-2: oklch(34% 0.022 52);
+    --cream:   oklch(94% 0.012 65);
+    --cream-2: oklch(90% 0.018 65);
+    --amber:   #ebebeb;
+    --amber-2: #d5d5d5;
+    --text-light: oklch(97% 0.006 65);
+    --text-dark:  oklch(18% 0.018 52);
+    --divider: oklch(60% 0.02  55);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; overflow-x: hidden; background: oklch(40% 0.025 52); color: var(--text-dark); }
+
+  /* -- NAV -- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 2.5rem;
+    background: transparent;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1), background 0.4s;
+  }
+  nav.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  nav.solid {
+    background: oklch(34% 0.024 52 / 0.93);
+    backdrop-filter: blur(14px);
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--amber); }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: oklch(90% 0.01 65);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--amber); }
+  .nav-socials { display: flex; gap: 1rem; align-items: center; }
+  .nav-socials a { color: oklch(88% 0.01 65); text-decoration: none; opacity: 0.8; transition: opacity 0.2s, color 0.2s; }
+  .nav-socials a:hover { opacity: 1; color: var(--amber); }
+  .nav-socials svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* -- HERO -- */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 650px;
+    background: var(--taupe);
+    overflow: hidden;
+  }
+
+  #hero-title {
+    position: absolute;
+    top: 5vh;
+    left: 3.5rem;
+    z-index: 1;
+    will-change: transform, opacity;
+  }
+  #hero-title h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(4.5rem, 11vw, 13rem);
+    line-height: 0.88;
+    text-transform: uppercase;
+    color: var(--text-light);
+    letter-spacing: -0.02em;
+    opacity: 0; transform: translateY(35px);
+  }
+  @keyframes headIn {
+    from { opacity: 0; transform: translateY(35px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-top: 0.8rem;
+    font-weight: 300;
+    animation: headIn 1s 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  #hero-face {
+    position: absolute;
+    bottom: 0;
+    left: 4%;
+    height: 89%;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom left;
+    z-index: 2;
+    will-change: transform, opacity;
+    opacity: 0; transform: translateX(-120px);
+  }
+
+  #hero-price-list {
+    position: absolute;
+    right: 3.5rem;
+    bottom: 8vh;
+    width: 36%;
+    min-width: 280px;
+    z-index: 3;
+    will-change: transform, opacity;
+    opacity: 0; transform: translateX(120px);
+  }
+
+  .hero-prices-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: oklch(60% 0.02 55);
+    margin-bottom: 0.5rem;
+  }
+  .hero-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid oklch(100% 0 0 / 0.1);
+    color: var(--text-light);
+  }
+  .hero-price-row:last-of-type { border-bottom: 1px solid oklch(100% 0 0 / 0.1); }
+  .hero-price-name { flex: 1; font-size: 1.05rem; font-weight: 400; letter-spacing: 0.02em; }
+  .hero-price-val  { flex-shrink: 0; white-space: nowrap; font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--amber); }
+
+  .hero-book-row {
+    margin-top: 1.2rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  /* -- BUTTON -- */
+  .btn-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--amber);
+    color: var(--text-dark);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-book:hover {
+    background: var(--amber-2);
+    transform: translateY(-1px);
+  }
+
+  .scroll-down-arrow {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    opacity: 0.45;
+    animation: arrowBob 2s ease-in-out infinite;
+  }
+  .scroll-down-arrow span { display: block; width: 1px; height: 32px; background: var(--text-light); }
+  .scroll-down-arrow svg { width: 12px; height: 8px; }
+  @keyframes arrowBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  /* -- PREISE SECTION -- */
+  #prices {
+    background: oklch(44% 0.025 52);
+    padding: 7rem 0 6rem;
+    overflow: hidden;
+  }
+  .prices-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 3.5rem;
+  }
+  .prices-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4rem;
+  }
+  .price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid oklch(100% 0 0 / 0.12);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .price-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .price-item.featured {
+    background: var(--taupe);
+    padding: 1rem 1.2rem;
+    margin: 0.4rem -1.2rem;
+    border-bottom: none;
+  }
+  .price-item.featured .pi-name { color: var(--text-light); }
+  .price-item.featured .pi-desc { color: oklch(72% 0.02 55); }
+  .price-item.featured .pi-price { color: var(--amber); }
+
+  .pi-left { flex: 1; padding-right: 1rem; }
+  .pi-name {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-light);
+    letter-spacing: 0.01em;
+  }
+  .pi-desc {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: oklch(62% 0.018 55);
+    margin-top: 0.15rem;
+    line-height: 1.4;
+  }
+  .pi-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--amber-2);
+    white-space: nowrap;
+  }
+  .prices-cta {
+    text-align: center;
+    margin-top: 4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s 0.4s, transform 0.6s 0.4s;
+  }
+  .prices-cta.visible { opacity: 1; transform: translateY(0); }
+
+  /* -- ABOUT -- */
+  #about {
+    background: oklch(38% 0.024 52);
+    padding: 7rem 0;
+    overflow: hidden;
+  }
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-text .section-label { color: oklch(70% 0.1 78); }
+  .about-text .section-title { color: var(--text-light); margin-bottom: 1.5rem; }
+  .about-text p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: oklch(82% 0.015 60);
+    margin-bottom: 1.2rem;
+  }
+  .about-img-placeholder {
+    aspect-ratio: 3/4;
+    background: oklch(45% 0.025 52);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+    position: relative;
+    opacity: 0; transform: translateX(40px);
+    transition: opacity 0.7s, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .about-img-placeholder.visible { opacity: 1; transform: translateX(0); }
+  .about-img-placeholder svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .about-img-placeholder span {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: oklch(58% 0.02 52); position: relative; z-index: 1;
+  }
+  .about-text { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s 0.15s, transform 0.7s 0.15s cubic-bezier(0.22,1,0.36,1); }
+  .about-text.visible { opacity: 1; transform: translateX(0); }
+
+  /* -- GALLERY -- */
+  #gallery {
+    background: oklch(42% 0.024 52);
+    padding: 7rem 0;
+  }
+  .gallery-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 3rem;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 3rem;
+    background: oklch(78% 0.015 60);
+  }
+  .gallery-item {
+    aspect-ratio: 1;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    opacity: 0; transform: scale(0.95);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .gallery-item.visible { opacity: 1; transform: scale(1); }
+  .gallery-item svg { width: 100%; height: 100%; }
+  .gallery-item span { position: absolute; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: oklch(60% 0.02 52); }
+
+  /* -- CONTACT -- */
+  #contact {
+    background: oklch(34% 0.022 52);
+    padding: 7rem 0;
+  }
+  .contact-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .contact-text .section-title { color: var(--text-light); margin-bottom: 2rem; }
+  .contact-text .section-label { color: oklch(70% 0.1 78); }
+  .contact-info { margin-bottom: 2.5rem; }
+  .contact-info-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1.2rem;
+    color: oklch(82% 0.015 60);
+    font-size: 0.95rem; font-weight: 300;
+  }
+  .contact-info-row strong { color: var(--text-light); font-weight: 500; display: block; margin-bottom: 0.15rem; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .contact-info-row a { color: oklch(82% 0.015 60); text-decoration: none; }
+  .contact-info-row a:hover { color: var(--amber); }
+  .contact-socials { display: flex; gap: 1rem; margin-top: 2rem; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid oklch(55% 0.02 52);
+    color: oklch(82% 0.015 60);
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.6rem 1.1rem;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--amber); color: var(--amber); }
+  .social-btn svg { width: 15px; height: 15px; fill: currentColor; }
+
+  .contact-booking {
+    background: var(--taupe);
+    padding: 3rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .contact-booking h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2.5rem;
+    text-transform: uppercase; line-height: 1;
+    color: var(--text-light);
+  }
+  .contact-booking p { font-size: 0.9rem; font-weight: 300; color: oklch(72% 0.018 60); line-height: 1.6; }
+
+  /* -- FOOTER -- */
+  footer {
+    background: oklch(24% 0.02 52);
+    padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 0.75rem; color: oklch(50% 0.018 52); letter-spacing: 0.08em; }
+  footer a { color: oklch(50% 0.018 52); text-decoration: none; }
+  footer a:hover { color: var(--amber); }
+
+  /* -- RESPONSIVE -- */
+  @media (max-width: 768px) {
+    #hero { grid-template-columns: 1fr; grid-template-rows: 45vh 1fr; }
+    .prices-grid { grid-template-columns: 1fr; }
+    .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .nav-links { display: none; }
+    .gallery-grid { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">MISTER <span>M</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#prices">Preise</a></li>
+    <li><a href="#gallery">Galerie</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+    <li><a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" style="color:var(--amber);opacity:1;">Termin buchen</a></li>
+  </ul>
+  <div class="nav-socials">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/mister.m.friseur/" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@1030misterm" target="_blank" title="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
+    </a>
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/people/Mr-M/100085018824015/" target="_blank" title="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="hero-title">
+    <h1>MISTER M</h1>
+    <p class="hero-tagline">Premium Friseur · Wien</p>
+  </div>
+
+  <img id="hero-face" src="hero.png" alt="Mister M Friseur" />
+
+  <div id="hero-price-list">
+    <p class="hero-prices-label">Ausgewählte Preise</p>
+    <div class="hero-price-row">
+      <span class="hero-price-name">Schneiden &amp; Föhnen</span>
+      <span class="hero-price-val">17 €</span>
+    </div>
+    <div class="hero-price-row">
+      <span class="hero-price-name">Schneiden, Waschen &amp; Styling</span>
+      <span class="hero-price-val">22 €</span>
+    </div>
+    <div class="hero-price-row">
+      <span class="hero-price-name">Rasieren</span>
+      <span class="hero-price-val">10 €</span>
+    </div>
+    <div class="hero-price-row">
+      <span class="hero-price-name">Fullservice</span>
+      <span class="hero-price-val">42 €</span>
+    </div>
+    <div class="hero-book-row">
+      <button class="btn-book" onclick="window.open('https://www.treatwell.at/ort/hiba-beauty-im-mister-m/','_blank')">Termin buchen</button>
+    </div>
+  </div>
+</section>
+
+<!-- FULL PRICES -->
+<section id="prices">
+  <div class="prices-inner">
+    <p class="section-label">Unsere Leistungen</p>
+    <h2 class="section-title">Preisliste</h2>
+    <div class="prices-grid" id="prices-grid">
+
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Schneiden & Föhnen</div>
+          </div>
+          <div class="pi-price">17 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Schneiden, Waschen & Styling</div>
+          </div>
+          <div class="pi-price">22 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Haarschnitt, Rasur & Föhnen</div>
+          </div>
+          <div class="pi-price">27 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Haarschnitt, Modellrasur & Föhnen</div>
+          </div>
+          <div class="pi-price">27 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Rasieren</div>
+          </div>
+          <div class="pi-price">10 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Modellrasur</div>
+          </div>
+          <div class="pi-price">12 €</div>
+        </div>
+        <div class="price-item featured">
+          <div class="pi-left">
+            <div class="pi-name">Fullservice</div>
+            <div class="pi-desc">Schneiden, Waschen, Föhnen, Rasieren</div>
+          </div>
+          <div class="pi-price">42 €</div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Haar-Farben</div>
+          </div>
+          <div class="pi-price">ab 30 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Kreatin-Protein</div>
+          </div>
+          <div class="pi-price">ab 100 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Dauerwelle</div>
+          </div>
+          <div class="pi-price">ab 45 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Kinderhaarschnitt bis 8 Jahre</div>
+          </div>
+          <div class="pi-price">12 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Kinderhaarschnitt ab 8 Jahre</div>
+          </div>
+          <div class="pi-price">17 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Augenbrauen Zupfen</div>
+          </div>
+          <div class="pi-price">7 €</div>
+        </div>
+        <div class="price-item">
+          <div class="pi-left">
+            <div class="pi-name">Heißwachs</div>
+          </div>
+          <div class="pi-price">8 €</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="prices-cta" id="prices-cta">
+      <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" class="btn-book" style="font-size:1rem; padding: 1rem 2.8rem;">
+        Jetzt Termin buchen →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <p class="section-label">Über uns</p>
+      <h2 class="section-title">Stil.<br>Handwerk.<br>Charakter.</h2>
+      <p>Bei Mister M dreht sich alles um Präzision, Persönlichkeit und das richtige Gefühl nach jedem Schnitt. Unser Team verbindet klassisches Friseurhandwerk mit modernem Style.</p>
+      <p>Wir nehmen uns Zeit für jeden Kunden — denn ein guter Haarschnitt fängt mit einem guten Gespräch an.</p>
+      <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" class="btn-book" style="display:inline-flex; margin-top:1rem;">Termin buchen →</a>
+    </div>
+    <div class="about-img-placeholder">
+      <svg viewBox="0 0 400 533" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="533" fill="oklch(45% 0.025 52)"/>
+        <line x1="0" y1="0" x2="400" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1"/>
+        <line x1="0" y1="133" x2="400" y2="666" stroke="oklch(50% 0.022 52)" stroke-width="1"/>
+        <line x1="0" y1="266" x2="400" y2="799" stroke="oklch(50% 0.022 52)" stroke-width="1"/>
+        <line x1="0" y1="400" x2="400" y2="933" stroke="oklch(50% 0.022 52)" stroke-width="1"/>
+        <line x1="100" y1="0" x2="500" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1"/>
+        <line x1="200" y1="0" x2="600" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1"/>
+        <line x1="300" y1="0" x2="700" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1"/>
+      </svg>
+      <span>Team-Foto</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <p class="section-label">Unsere Arbeit</p>
+    <h2 class="section-title">Galerie</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(88% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(80% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(80% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(80% 0.018 62)" stroke-width="1"/></svg><span>Foto 1</span></div>
+      <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(86% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(78% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(78% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(78% 0.018 62)" stroke-width="1"/></svg><span>Foto 2</span></div>
+      <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(90% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(82% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(82% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(82% 0.018 62)" stroke-width="1"/></svg><span>Foto 3</span></div>
+      <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(87% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(79% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(79% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(79% 0.018 62)" stroke-width="1"/></svg><span>Foto 4</span></div>
+      <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(89% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(81% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1"/></svg><span>Foto 5</span></div>
+      <div class="gallery-item"><svg viewBox="0 0 400 400"><rect width="400" height="400" fill="oklch(85% 0.015 62)"/><line x1="0" y1="0" x2="400" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1"/><line x1="100" y1="0" x2="400" y2="300" stroke="oklch(77% 0.018 62)" stroke-width="1"/><line x1="0" y1="100" x2="300" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1"/></svg><span>Foto 6</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-text">
+      <p class="section-label">Kontakt</p>
+      <h2 class="section-title">Komm<br>vorbei.</h2>
+      <div class="contact-info">
+        <div class="contact-info-row">
+          <div>
+            <strong>Adresse</strong>
+            Wien, Österreich
+          </div>
+        </div>
+        <div class="contact-info-row">
+          <div>
+            <strong>Öffnungszeiten</strong>
+            Mo – Fr: 09:00 – 19:00 Uhr<br>
+            Sa: 09:00 – 17:00 Uhr
+          </div>
+        </div>
+        <div class="contact-info-row">
+          <div>
+            <strong>Online Buchung</strong>
+            <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank">Über Treatwell</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-socials">
+        <a href="https://www.instagram.com/mister.m.friseur/" target="_blank" class="social-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.tiktok.com/@1030misterm" target="_blank" class="social-btn">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
+          TikTok
+        </a>
+        <a href="https://www.facebook.com/people/Mr-M/100085018824015/" target="_blank" class="social-btn">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+    <div class="contact-booking">
+      <h3>Termin<br>buchen</h3>
+      <p>Buche deinen Wunschtermin ganz einfach online — schnell, unkompliziert, jederzeit.</p>
+      <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank" class="btn-book" style="align-self:flex-start;">
+        Zur Online-Buchung →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Mister M — Friseur Wien</p>
+  <p><a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank">Termin buchen</a></p>
+</footer>
+
+<script>
+// -- Entrance animations --
+const heroFace = document.getElementById('hero-face');
+const heroPriceList = document.getElementById('hero-price-list');
+const heroTitle = document.getElementById('hero-title');
+const heroTitleH1 = heroTitle ? heroTitle.querySelector('h1') : null;
+const nav = document.getElementById('main-nav');
+const heroSection = document.getElementById('hero');
+
+function applyTransition(el, delay) {
+  el.style.transition = `opacity 0.75s ${delay}s cubic-bezier(0.22,1,0.36,1), transform 0.75s ${delay}s cubic-bezier(0.22,1,0.36,1)`;
+}
+
+// Trigger entrance after paint
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    if (heroTitle) { applyTransition(heroTitle, 0.1); heroTitle.style.opacity = '1'; heroTitle.style.transform = 'translateY(0)'; }
+    if (heroFace) { applyTransition(heroFace, 0.2); heroFace.style.opacity = '1'; heroFace.style.transform = 'translateX(0)'; }
+    if (heroPriceList) { applyTransition(heroPriceList, 0.35); heroPriceList.style.opacity = '1'; heroPriceList.style.transform = 'translateX(0)'; }
+  });
+});
+
+// -- Scroll animations --
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const scrollY = window.scrollY;
+    const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
+    const progress = Math.min(scrollY / (heroH * 0.45), 1);
+
+    // Nav
+    if (scrollY > heroH * 0.12) { nav.classList.add('visible'); nav.classList.toggle('solid', scrollY > heroH * 0.35); }
+    else nav.classList.remove('visible', 'solid');
+
+    if (progress > 0) {
+      const noTrans = 'opacity 0s, transform 0s';
+      // Face slides left
+      if (heroFace) {
+        heroFace.style.transition = noTrans;
+        heroFace.style.transform = `translateX(${progress * -14}%)`;
+        heroFace.style.opacity = Math.max(0, 1 - progress * 1.5);
+      }
+      // Prices slide right
+      if (heroPriceList) {
+        heroPriceList.style.transition = noTrans;
+        heroPriceList.style.transform = `translateX(${progress * 90}px)`;
+        heroPriceList.style.opacity = Math.max(0, 1 - progress * 1.5);
+      }
+      // Title fades up
+      if (heroTitle) {
+        heroTitle.style.transition = noTrans;
+        heroTitle.style.transform = `translateY(${progress * -45}px)`;
+        heroTitle.style.opacity = Math.max(0, 1 - progress * 1.6);
+      }
+    }
+    ticking = false;
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// IntersectionObserver for animated entrances
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+// Stagger price items
+const priceItems = document.querySelectorAll('.price-item');
+priceItems.forEach((item, i) => {
+  item.style.transitionDelay = `${i * 0.055}s`;
+  observer.observe(item);
+});
+observer.observe(document.getElementById('prices-cta'));
+
+// About + gallery
+document.querySelectorAll('.about-text, .about-img-placeholder, .gallery-item').forEach((el, i) => {
+  if (el.classList.contains('gallery-item')) el.style.transitionDelay = `${i * 0.08}s`;
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
