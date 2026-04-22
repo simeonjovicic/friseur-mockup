@@ -207,6 +207,14 @@
     position: relative;
     z-index: 1;
   }
+  .sticky-section {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   /* -- PREISE SECTION -- */
   #prices {
@@ -496,7 +504,7 @@
 <div id="content">
 
 <!-- FULL PRICES -->
-<section id="prices">
+<section id="prices" class="sticky-section">
   <div class="prices-inner">
     <p class="section-label">Unsere Leistungen</p>
     <h2 class="section-title">Preisliste</h2>
@@ -605,7 +613,7 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="sticky-section">
   <div class="about-inner">
     <div class="about-text">
       <p class="section-label">Über uns</p>
@@ -631,7 +639,7 @@
 </section>
 
 <!-- GALLERY -->
-<section id="gallery">
+<section id="gallery" class="sticky-section">
   <div class="gallery-inner">
     <p class="section-label">Unsere Arbeit</p>
     <h2 class="section-title">Galerie</h2>
@@ -647,7 +655,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="sticky-section">
   <div class="contact-inner">
     <div class="contact-text">
       <p class="section-label">Kontakt</p>
