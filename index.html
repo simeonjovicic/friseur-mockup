@@ -647,6 +647,7 @@
       flex: 1;
       position: relative;
       margin-top: 1rem;
+      perspective: 1400px;
     }
 
     .standort-card {
@@ -927,6 +928,260 @@
       color: var(--amber);
     }
 
+    /* -- FLOATING CTA -- */
+    .floating-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      background: var(--amber);
+      color: var(--text-dark);
+      border: none;
+      padding: 0.75rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 24px oklch(0% 0 0 / 0.4);
+      transition: background 0.2s;
+      opacity: 0;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .floating-cta.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .floating-cta.docked {
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+
+    .floating-cta:hover {
+      background: var(--amber-2);
+    }
+
+    /* -- BOOKING MODAL -- */
+    .booking-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: oklch(0% 0 0 / 0.6);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .booking-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .booking-card {
+      background: oklch(36% 0.023 52);
+      color: var(--text-light);
+      width: 90%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2.5rem 2.5rem 2rem;
+      position: relative;
+      transform: translateY(30px) scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .booking-overlay.open .booking-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .booking-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      color: oklch(70% 0.01 55);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .booking-close:hover {
+      color: var(--amber);
+    }
+
+    .booking-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.3rem;
+    }
+
+    .booking-card .booking-subtitle {
+      font-size: 0.82rem;
+      color: oklch(70% 0.015 55);
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.04em;
+    }
+
+    .booking-field {
+      margin-bottom: 1.2rem;
+    }
+
+    .booking-field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: oklch(70% 0.015 55);
+      margin-bottom: 0.4rem;
+    }
+
+    .booking-field select,
+    .booking-field input {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      background: oklch(30% 0.02 52);
+      border: 1px solid oklch(50% 0.02 52);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .booking-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8a46e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      padding-right: 2.4rem;
+      cursor: pointer;
+    }
+
+    .booking-field select:focus,
+    .booking-field input:focus {
+      border-color: var(--amber);
+    }
+
+    .booking-field input::placeholder {
+      color: oklch(50% 0.015 52);
+    }
+
+    .booking-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .booking-submit {
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.9rem;
+      background: var(--amber);
+      color: var(--text-dark);
+      border: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .booking-submit:hover {
+      background: var(--amber-2);
+      transform: translateY(-1px);
+    }
+
+    .booking-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Confirmation state */
+    .booking-confirmation {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .booking-confirmation .check-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1.2rem;
+      border: 2px solid var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--amber);
+      font-size: 1.6rem;
+    }
+
+    .booking-confirmation h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-confirmation p {
+      font-size: 0.88rem;
+      color: oklch(70% 0.015 55);
+      line-height: 1.6;
+    }
+
+    .booking-confirmation .booking-details {
+      margin: 1.2rem 0;
+      padding: 1rem;
+      background: oklch(30% 0.02 52);
+      text-align: left;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+
+    .booking-confirmation .booking-details strong {
+      color: var(--text-light);
+    }
+
+    .booking-done-btn {
+      margin-top: 1.2rem;
+      padding: 0.7rem 2rem;
+      background: transparent;
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .booking-done-btn:hover {
+      background: var(--amber);
+      color: var(--text-dark);
+    }
+
     /* -- RESPONSIVE -- */
     @media (max-width: 768px) {
       #hero {
@@ -950,6 +1205,19 @@
 
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .floating-cta {
+        bottom: 1.2rem;
+        right: 1.2rem;
+      }
+
+      .booking-card {
+        padding: 2rem 1.5rem 1.5rem;
+      }
+
+      .booking-row {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -1326,10 +1594,6 @@
                   Mo – Fr: 09:00 – 19:00 Uhr<br>
                   Sa: 09:00 – 17:00 Uhr
                 </div>
-                <div class="standort-cta">
-                  <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank"
-                    class="btn-book">Termin buchen →</a>
-                </div>
               </div>
             </div>
 
@@ -1351,10 +1615,6 @@
                   <strong>Öffnungszeiten</strong>
                   Mo – Fr: 09:00 – 19:00 Uhr<br>
                   Sa: 09:00 – 17:00 Uhr
-                </div>
-                <div class="standort-cta">
-                  <a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank"
-                    class="btn-book">Termin buchen →</a>
                 </div>
               </div>
             </div>
@@ -1432,6 +1692,95 @@
 
     <!-- FOOTER -->
   </div><!-- /content -->
+
+  <!-- FLOATING BOOKING CTA -->
+  <button class="floating-cta" id="floating-cta" onclick="openBooking()">Termin buchen</button>
+
+  <!-- BOOKING MODAL -->
+  <div class="booking-overlay" id="booking-overlay" onclick="if(event.target===this)closeBooking()">
+    <div class="booking-card" id="booking-card">
+      <button class="booking-close" onclick="closeBooking()">&times;</button>
+
+      <!-- FORM -->
+      <div id="booking-form-view">
+        <h3>Termin buchen</h3>
+        <p class="booking-subtitle">Wähle deinen Service und Wunschtermin</p>
+
+        <div class="booking-field">
+          <label for="booking-service">Service</label>
+          <select id="booking-service">
+            <option value="">Bitte wählen…</option>
+            <option value="Schneiden & Föhnen — 17 €">Schneiden & Föhnen — 17 €</option>
+            <option value="Schneiden, Waschen & Styling — 22 €">Schneiden, Waschen & Styling — 22 €</option>
+            <option value="Haarschnitt, Rasur & Föhnen — 27 €">Haarschnitt, Rasur & Föhnen — 27 €</option>
+            <option value="Haarschnitt, Modellrasur & Föhnen — 27 €">Haarschnitt, Modellrasur & Föhnen — 27 €</option>
+            <option value="Rasieren — 10 €">Rasieren — 10 €</option>
+            <option value="Modellrasur — 12 €">Modellrasur — 12 €</option>
+            <option value="Fullservice — 42 €">Fullservice — 42 €</option>
+            <option value="Haar-Farben — ab 30 €">Haar-Farben — ab 30 €</option>
+            <option value="Kreatin-Protein — ab 100 €">Kreatin-Protein — ab 100 €</option>
+            <option value="Dauerwelle — ab 45 €">Dauerwelle — ab 45 €</option>
+            <option value="Kinderhaarschnitt bis 8 Jahre — 12 €">Kinderhaarschnitt bis 8 Jahre — 12 €</option>
+            <option value="Kinderhaarschnitt ab 8 Jahre — 17 €">Kinderhaarschnitt ab 8 Jahre — 17 €</option>
+            <option value="Augenbrauen Zupfen — 7 €">Augenbrauen Zupfen — 7 €</option>
+            <option value="Heißwachs — 8 €">Heißwachs — 8 €</option>
+          </select>
+        </div>
+
+        <div class="booking-field">
+          <label for="booking-standort">Standort</label>
+          <select id="booking-standort">
+            <option value="City Barbershop">City Barbershop</option>
+            <option value="City Barbershop 2">City Barbershop 2</option>
+          </select>
+        </div>
+
+        <div class="booking-row">
+          <div class="booking-field">
+            <label for="booking-date">Datum</label>
+            <input type="date" id="booking-date">
+          </div>
+          <div class="booking-field">
+            <label for="booking-time">Uhrzeit</label>
+            <select id="booking-time">
+              <option value="">Bitte wählen…</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="booking-field">
+          <label for="booking-name">Name</label>
+          <input type="text" id="booking-name" placeholder="Vor- und Nachname">
+        </div>
+
+        <div class="booking-row">
+          <div class="booking-field">
+            <label for="booking-phone">Telefon</label>
+            <input type="tel" id="booking-phone" placeholder="+43 ...">
+          </div>
+          <div class="booking-field">
+            <label for="booking-email">E-Mail (optional)</label>
+            <input type="email" id="booking-email" placeholder="mail@beispiel.at">
+          </div>
+        </div>
+
+        <button class="booking-submit" id="booking-submit" onclick="submitBooking()">Termin bestätigen</button>
+      </div>
+
+      <!-- CONFIRMATION -->
+      <div id="booking-confirm-view" style="display:none;">
+        <div class="booking-confirmation">
+          <div class="check-icon">&#10003;</div>
+          <h4>Termin gebucht!</h4>
+          <p>Dein Termin wurde erfolgreich gespeichert.</p>
+          <div class="booking-details" id="booking-details"></div>
+          <button class="booking-done-btn" onclick="closeBooking()">Schließen</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <footer style="position:relative;z-index:1;">
     <p>&copy; 2026 City Barbershop — Friseur Wien</p>
     <p><a href="https://www.treatwell.at/ort/hiba-beauty-im-mister-m/" target="_blank">Termin buchen</a></p>
@@ -1642,7 +1991,7 @@
           el.style.transform = `translateY(${(1 - p) * 30}px)`;
         });
 
-        // Showcase: Card 1 foreground → background, Card 2 background → foreground
+        // 3D carousel — selected center, other on side in perspective
         const card1 = document.getElementById('standort-1');
         const card2 = document.getElementById('standort-2');
         const dot1 = document.getElementById('dot-1');
@@ -1650,26 +1999,29 @@
         if (card1 && card2) {
           const enterP = clamp01((sp_enter - 0.4) * 2.5);
           const tLinear = clamp01((sp_slide - 0.1) / 0.7);
-          // Smooth ease-in-out curve for more natural feel
           const t = tLinear < 0.5
             ? 2 * tLinear * tLinear
             : 1 - Math.pow(-2 * tLinear + 2, 2) / 2;
 
-          // Card 1: scale(1) centered → scale(0.75) shifted left
-          const s1 = 1 - t * 0.25;
-          const x1 = t * -28;
+          // Card 1: center → left side shelf
+          const x1 = t * -32;
+          const z1 = t * -150;
+          const ry1 = t * 28;
+          const s1 = 1 - t * 0.15;
           card1.style.opacity = enterP;
-          card1.style.transform = `translateX(${x1}%) scale(${s1})`;
+          card1.style.transform = `translateX(${x1}%) translateZ(${z1}px) rotateY(${ry1}deg) scale(${s1})`;
           card1.style.zIndex = t < 0.5 ? '2' : '1';
-          card1.style.filter = `brightness(${1 - t * 0.25})`;
+          card1.style.filter = `brightness(${1 - t * 0.35})`;
 
-          // Card 2: scale(0.75) shifted right → scale(1) centered
-          const s2 = 0.75 + t * 0.25;
-          const x2 = (1 - t) * 28;
-          card2.style.opacity = 0.4 + enterP * 0.6;
-          card2.style.transform = `translateX(${x2}%) scale(${s2})`;
+          // Card 2: right side shelf → center
+          const x2 = (1 - t) * 32;
+          const z2 = (1 - t) * -150;
+          const ry2 = (1 - t) * -28;
+          const s2 = 0.85 + t * 0.15;
+          card2.style.opacity = enterP;
+          card2.style.transform = `translateX(${x2}%) translateZ(${z2}px) rotateY(${ry2}deg) scale(${s2})`;
           card2.style.zIndex = t < 0.5 ? '1' : '2';
-          card2.style.filter = `brightness(${0.75 + t * 0.25})`;
+          card2.style.filter = `brightness(${0.65 + t * 0.35})`;
 
           if (dot1 && dot2) {
             dot1.classList.toggle('active', t < 0.5);
@@ -1706,6 +2058,181 @@
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // -- FLOATING CTA: scroll-driven flight from hero to corner --
+    const floatingCta = document.getElementById('floating-cta');
+    const heroBookBtn = document.querySelector('#hero-price-list .btn-book');
+    let heroBtnOriginX = 0, heroBtnOriginY = 0, ctaReady = false;
+
+    // After entrance animation, swap hero button for the floating CTA
+    setTimeout(() => {
+      if (heroBookBtn && floatingCta) {
+        const r = heroBookBtn.getBoundingClientRect();
+        heroBtnOriginX = r.left;
+        heroBtnOriginY = r.top;
+        heroBookBtn.style.visibility = 'hidden';
+        floatingCta.classList.add('active');
+        ctaReady = true;
+        positionFloatingCta();
+      }
+    }, 1100);
+
+    function positionFloatingCta() {
+      if (!ctaReady || !floatingCta) return;
+
+      const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
+      const scrollY = window.scrollY;
+
+      // Progress: fly during first 35% of hero scroll-through
+      const raw = clamp01(scrollY / (heroH * 0.35));
+      // Smooth ease-in-out
+      const t = raw < 0.5
+        ? 2 * raw * raw
+        : 1 - Math.pow(-2 * raw + 2, 2) / 2;
+
+      // Corner position (where CSS bottom:2rem right:2rem resolves to)
+      const vw = document.documentElement.clientWidth;
+      const vh = document.documentElement.clientHeight;
+      const ctaW = floatingCta.offsetWidth;
+      const ctaH = floatingCta.offsetHeight;
+      const cornerX = vw - 32 - ctaW;
+      const cornerY = vh - 32 - ctaH;
+
+      // Delta from corner to hero button origin
+      const dx = heroBtnOriginX - cornerX;
+      const dy = heroBtnOriginY - cornerY;
+
+      // At t=0: full offset (hero position), at t=1: no offset (corner)
+      floatingCta.style.transform = `translate(${dx * (1 - t)}px, ${dy * (1 - t)}px)`;
+
+      // Glow pulse when docked in corner
+      floatingCta.classList.toggle('docked', t > 0.95);
+    }
+
+    window.addEventListener('scroll', positionFloatingCta, { passive: true });
+    window.addEventListener('resize', () => {
+      if (heroBookBtn) {
+        heroBookBtn.style.visibility = '';
+        const r = heroBookBtn.getBoundingClientRect();
+        heroBtnOriginX = r.left;
+        heroBtnOriginY = r.top;
+        heroBookBtn.style.visibility = 'hidden';
+        positionFloatingCta();
+      }
+    });
+
+    // -- BOOKING MODAL --
+    const bookingOverlay = document.getElementById('booking-overlay');
+    const bookingFormView = document.getElementById('booking-form-view');
+    const bookingConfirmView = document.getElementById('booking-confirm-view');
+
+    // Populate time slots (8:00 - 18:00, every 30 min)
+    const timeSelect = document.getElementById('booking-time');
+    for (let h = 8; h <= 17; h++) {
+      for (let m = 0; m < 60; m += 30) {
+        const hh = String(h).padStart(2, '0');
+        const mm = String(m).padStart(2, '0');
+        const opt = document.createElement('option');
+        opt.value = `${hh}:${mm}`;
+        opt.textContent = `${hh}:${mm}`;
+        timeSelect.appendChild(opt);
+      }
+    }
+    // Add 18:00 as last slot
+    const lastOpt = document.createElement('option');
+    lastOpt.value = '18:00';
+    lastOpt.textContent = '18:00';
+    timeSelect.appendChild(lastOpt);
+
+    // Set min date to today
+    const dateInput = document.getElementById('booking-date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.value = today;
+
+    function openBooking() {
+      bookingFormView.style.display = '';
+      bookingConfirmView.style.display = 'none';
+      bookingOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBooking() {
+      bookingOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Saved appointments (frontend only)
+    const appointments = [];
+
+    function submitBooking() {
+      const service = document.getElementById('booking-service').value;
+      const standort = document.getElementById('booking-standort').value;
+      const date = document.getElementById('booking-date').value;
+      const time = document.getElementById('booking-time').value;
+      const name = document.getElementById('booking-name').value.trim();
+      const phone = document.getElementById('booking-phone').value.trim();
+      const email = document.getElementById('booking-email').value.trim();
+
+      if (!service || !date || !time || !name || (!phone && !email)) {
+        // Brief highlight of empty fields
+        [['booking-service', !service], ['booking-date', !date], ['booking-time', !time],
+         ['booking-name', !name]].forEach(([id, empty]) => {
+          if (empty) {
+            const el = document.getElementById(id);
+            el.style.borderColor = '#e74c3c';
+            setTimeout(() => el.style.borderColor = '', 1500);
+          }
+        });
+        if (!phone && !email) {
+          ['booking-phone', 'booking-email'].forEach(id => {
+            const el = document.getElementById(id);
+            el.style.borderColor = '#e74c3c';
+            setTimeout(() => el.style.borderColor = '', 1500);
+          });
+        }
+        return;
+      }
+
+      // Save appointment
+      const apt = { service, standort, date, time, name, phone, email, id: Date.now() };
+      appointments.push(apt);
+      console.log('Termin gespeichert:', apt, 'Alle Termine:', appointments);
+
+      // Format date for display
+      const dateObj = new Date(date + 'T00:00:00');
+      const dateStr = dateObj.toLocaleDateString('de-AT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+      // Show confirmation
+      document.getElementById('booking-details').innerHTML =
+        `<strong>Service:</strong> ${service}<br>` +
+        `<strong>Standort:</strong> ${standort}<br>` +
+        `<strong>Datum:</strong> ${dateStr}<br>` +
+        `<strong>Uhrzeit:</strong> ${time} Uhr<br>` +
+        `<strong>Name:</strong> ${name}<br>` +
+        (phone ? `<strong>Telefon:</strong> ${phone}<br>` : '') +
+        (email ? `<strong>E-Mail:</strong> ${email}` : '');
+
+      bookingFormView.style.display = 'none';
+      bookingConfirmView.style.display = '';
+
+      // Reset form
+      document.getElementById('booking-service').value = '';
+      document.getElementById('booking-time').value = '';
+      document.getElementById('booking-name').value = '';
+      document.getElementById('booking-phone').value = '';
+      document.getElementById('booking-email').value = '';
+      document.getElementById('booking-date').value = today;
+    }
+
+    // Wire up all existing "Termin buchen" buttons to open the modal instead
+    document.querySelectorAll('.btn-book').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openBooking();
+      });
+    });
   </script>
 </body>
 
