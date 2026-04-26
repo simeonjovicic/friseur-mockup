@@ -80,6 +80,17 @@
       color: var(--text-light);
       text-decoration: none;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo-img {
+      height: 2.8rem;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 6px rgba(220,53,69,0.4));
     }
 
     .nav-logo span {
@@ -167,10 +178,23 @@
       text-transform: uppercase;
       color: var(--text-light);
       letter-spacing: -0.02em;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4em;
+    }
+
+    .hero-logo-img {
+      height: 1.5em;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      align-self: flex-start;
+      filter: drop-shadow(0 0 14px rgba(220,53,69,0.55));
     }
 
     #hero-title h1 span {
       display: inline;
+      margin-top: 0.18em;
     }
 
     @keyframes headIn {
@@ -1522,6 +1546,17 @@
       color: var(--text-light);
       text-decoration: none;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .mobile-nav-logo-img {
+      height: 3.2rem;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(220,53,69,0.45));
     }
 
     .mobile-nav-logo span {
@@ -1590,7 +1625,8 @@
       .nav-burger { display: flex; }
       .mobile-nav-overlay { display: flex; }
       nav { padding: 1rem 1.4rem; }
-      .nav-logo { font-size: 1.25rem; }
+      .nav-logo { font-size: 1.25rem; gap: 0.4rem; }
+      .nav-logo-img { height: 2.1rem; }
 
       /* --- HERO — calmer mobile composition --- */
       #hero {
@@ -1604,7 +1640,7 @@
       #hero-title {
         left: 1.25rem;
         right: 1.25rem;
-        top: 5.2rem;
+        top: 3.5rem;
         z-index: 4;
       }
 
@@ -1614,6 +1650,16 @@
         letter-spacing: 0;
         max-width: 7.8ch;
         white-space: normal;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        column-gap: 0.2em;
+        row-gap: 0;
+      }
+
+      .hero-logo-img {
+        height: 1.15em;
+        margin-top: 0.05em;
       }
 
       #hero-title h1 span {
@@ -2072,7 +2118,7 @@
 
   <!-- NAV -->
   <nav id="main-nav">
-    <a href="#hero" class="nav-logo">CITY <span>BARBERSHOP</span></a>
+    <a href="#hero" class="nav-logo"><img src="barber_pole.png" alt="" class="nav-logo-img">CITY <span>BARBERSHOP</span></a>
     <ul class="nav-links">
       <li><a href="#about">Über uns</a></li>
       <li><a href="#prices">Preise</a></li>
@@ -2114,7 +2160,7 @@
   <!-- MOBILE NAV OVERLAY -->
   <div class="mobile-nav-overlay" id="mobile-nav-overlay">
     <div class="mobile-nav-content">
-      <a href="#hero" class="mobile-nav-logo">CITY <span>BARBERSHOP</span></a>
+      <a href="#hero" class="mobile-nav-logo"><img src="barber_pole.png" alt="" class="mobile-nav-logo-img">CITY <span>BARBERSHOP</span></a>
       <ul class="mobile-nav-links">
         <li><a href="#about">Über uns</a></li>
         <li><a href="#prices">Preise</a></li>
@@ -2140,7 +2186,7 @@
   <!-- HERO -->
   <section id="hero">
     <div id="hero-title">
-      <h1><span>CITY</span> <span>BARBERSHOP</span></h1>
+      <h1><img src="barber_pole.png" alt="" class="hero-logo-img"><span>CITY</span> <span>BARBERSHOP</span></h1>
       <p class="hero-tagline">Dein Friseur in Wien · 2 Standorte</p>
     </div>
 
