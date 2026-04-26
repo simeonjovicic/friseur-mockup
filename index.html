@@ -168,6 +168,10 @@
       letter-spacing: -0.02em;
     }
 
+    #hero-title h1 span {
+      display: inline;
+    }
+
     @keyframes headIn {
       from {
         opacity: 0;
@@ -566,6 +570,10 @@
       background: oklch(42% 0.022 52);
       padding: 1.5rem;
       will-change: transform, opacity;
+    }
+
+    .review-card-spacer {
+      display: none;
     }
 
     .review-header {
@@ -1337,58 +1345,77 @@
       nav { padding: 1rem 1.4rem; }
       .nav-logo { font-size: 1.25rem; }
 
-      /* --- HERO --- */
-      #hero { min-height: 100svh; }
+      /* --- HERO — calmer mobile composition --- */
+      #hero {
+        height: 100svh;
+        min-height: 640px;
+        isolation: isolate;
+      }
+
       #hero-spacer { height: 100svh; min-height: unset; }
 
       #hero-title {
-        left: 1.4rem;
-        right: 1.4rem;
-        top: 0;
+        left: 1.25rem;
+        right: 1.25rem;
+        top: 5.2rem;
+        z-index: 4;
       }
 
       #hero-title h1 {
-        font-size: clamp(3.4rem, 16vw, 5.5rem);
+        font-size: clamp(3.2rem, 15vw, 4.65rem);
+        line-height: 0.86;
+        letter-spacing: 0;
+        max-width: 7.8ch;
         white-space: normal;
-        line-height: 0.9;
+      }
+
+      #hero-title h1 span {
+        display: block;
       }
 
       .hero-tagline {
-        font-size: 0.68rem;
-        letter-spacing: 0.22em;
+        max-width: 15rem;
+        font-size: 0.66rem;
+        letter-spacing: 0.18em;
+        line-height: 1.45;
         margin-top: 0.7rem;
+        opacity: 0.92;
       }
 
+      /* Face image — positioned as a brand visual, not as a competing content block */
       #hero-face {
-        left: 50%;
-        transform: translateX(-50%);
-        height: 80%;
+        left: auto;
+        right: 3rem;
         bottom: auto;
-        top: 6%;
+        top: 13rem;
+        height: 57%;
+        max-height: 460px;
         width: auto;
+        object-position: bottom right;
+        transform: translateX(0);
       }
 
-      /* Top vignette — nav legibility */
+      /* Soft top vignette — nav legibility */
       #hero::before {
         content: '';
         position: absolute;
         left: 0; right: 0; top: 0;
-        height: 30%;
-        background: linear-gradient(to bottom, oklch(22% 0.02 52 / 0.72) 0%, transparent 100%);
+        height: 26%;
+        background: linear-gradient(to bottom, oklch(22% 0.02 52 / 0.55) 0%, transparent 100%);
         z-index: 1;
         pointer-events: none;
       }
 
-      /* Bottom vignette — price list legibility */
+      /* Bottom vignette — slimmer, only behind price block */
       #hero::after {
         content: '';
         position: absolute;
         left: 0; right: 0; bottom: 0;
-        height: 64%;
+        height: 38%;
         background: linear-gradient(to top,
-          oklch(24% 0.02 52 / 0.99) 0%,
-          oklch(27% 0.02 52 / 0.92) 30%,
-          oklch(30% 0.02 52 / 0.55) 60%,
+          oklch(24% 0.02 52 / 0.97) 0%,
+          oklch(27% 0.02 52 / 0.82) 40%,
+          oklch(30% 0.02 52 / 0.35) 75%,
           transparent 100%
         );
         z-index: 3;
@@ -1396,31 +1423,44 @@
       }
 
       #hero-price-list {
-        right: 1.4rem;
-        left: 1.4rem;
+        right: 1rem;
+        left: 1rem;
         top: auto;
-        bottom: 1.8rem;
+        bottom: 1rem;
         width: auto;
         min-width: unset;
         transform: none;
         z-index: 4;
+        padding: 1rem;
+        background: oklch(27% 0.02 52 / 0.86);
+        border: 1px solid oklch(100% 0 0 / 0.12);
+        border-radius: 8px;
+        backdrop-filter: blur(18px);
+        box-shadow: 0 18px 40px oklch(0% 0 0 / 0.28);
+      }
+
+      /* Show only 2 anchor prices on mobile — entry + premium */
+      .hero-price-row:nth-child(3),
+      .hero-price-row:nth-child(4) {
+        display: none;
       }
 
       .hero-prices-label {
-        font-size: 0.62rem;
-        letter-spacing: 0.2em;
-        margin-bottom: 0.45rem;
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        margin-bottom: 0.5rem;
+        opacity: 0.85;
       }
 
-      .hero-price-row { padding: 0.7rem 0; }
+      .hero-price-row { padding: 0.65rem 0; }
       .hero-price-name { font-size: 0.95rem; }
       .hero-price-val { font-size: 1.25rem; }
-      .hero-book-row { margin-top: 0.9rem; }
+      .hero-book-row { margin-top: 0.85rem; }
 
       .hero-book-row .btn-book {
         width: 100%;
         justify-content: center;
-        padding: 0.95rem 1.5rem;
+        padding: 1rem 1.5rem;
         font-size: 0.9rem;
         letter-spacing: 0.14em;
       }
@@ -1429,7 +1469,7 @@
       .sticky-section {
         position: relative;
         min-height: auto;
-        padding: 4.5rem 0;
+        padding: 4rem 0;
       }
 
       #content {
@@ -1445,9 +1485,9 @@
       }
 
       .section-title {
-        font-size: clamp(2.8rem, 11vw, 4rem);
-        margin-bottom: 2.2rem;
-        line-height: 0.92;
+        font-size: clamp(2.4rem, 10vw, 3.45rem);
+        margin-bottom: 1.9rem;
+        line-height: 0.94;
       }
 
       /* --- PRICES --- */
@@ -1458,7 +1498,11 @@
         gap: 0;
       }
 
-      .price-item { padding: 0.9rem 0; }
+      .price-item {
+        gap: 1rem;
+        padding: 0.85rem 0;
+        align-items: flex-start;
+      }
       .pi-name { font-size: 0.97rem; }
       .pi-desc { font-size: 0.74rem; }
       .pi-price { font-size: 1.2rem; }
@@ -1522,24 +1566,31 @@
         aspect-ratio: 16/8;
       }
 
-      /* --- REVIEWS — horizontal swipe --- */
+      /* --- REVIEWS — stable stacked mobile cards --- */
       .reviews-inner {
-        padding: 0;
-        overflow: hidden;
+        padding: 0 1.4rem;
+        overflow: visible;
       }
 
       .reviews-inner .section-label,
       .reviews-inner .section-title {
-        padding-left: 1.4rem;
-        padding-right: 1.4rem;
+        padding-left: 0;
+        padding-right: 0;
       }
 
       .reviews-grid {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 0.9rem;
-        padding: 0.5rem 1.4rem 1.2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        overflow: visible;
+        scroll-snap-type: none;
+        overscroll-behavior-x: auto;
+        touch-action: auto;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        padding: 0;
+        scroll-padding-left: 0;
+        scroll-padding-right: 0;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
       }
@@ -1547,31 +1598,69 @@
       .reviews-grid::-webkit-scrollbar { display: none; }
 
       .review-card {
-        flex: 0 0 83vw;
-        scroll-snap-align: start;
-        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: visible;
+        scroll-snap-align: none;
+        scroll-snap-stop: normal;
+        padding: 1.25rem;
+        background: oklch(40% 0.022 52);
+        margin: 0;
+      }
+
+      .review-card:last-child {
+        margin-right: 0;
+      }
+
+      .review-card-spacer {
+        display: none;
       }
 
       .review-name { font-size: 0.93rem; }
-      .review-text { font-size: 0.9rem; line-height: 1.65; }
-      .review-header { gap: 0.7rem; }
+      .review-text {
+        font-size: 0.9rem;
+        line-height: 1.65;
+        overflow-wrap: break-word;
+        word-break: normal;
+      }
+
+      .review-header {
+        gap: 0.7rem;
+        flex-wrap: nowrap;
+      }
+
+      .review-stars {
+        width: auto;
+        margin-left: auto;
+        white-space: nowrap;
+      }
+
       .review-avatar { width: 36px; height: 36px; font-size: 0.88rem; }
 
       .reviews-cta {
-        padding: 0 1.4rem;
+        padding: 0;
         margin-top: 2rem;
+        display: flex;
+        justify-content: center;
       }
 
       .reviews-cta a.btn-book {
-        display: block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
         text-align: center;
-        width: 100%;
-        padding: 0.95rem 2rem;
+        width: auto;
+        padding: 1rem 2rem;
+        background: var(--amber);
+        color: var(--text-dark);
+        font-size: 0.9rem;
       }
 
-      /* --- STANDORTE — stacked cards --- */
+      /* --- STANDORTE — horizontal swipe carousel --- */
       #standorte-wrapper { height: auto; }
-      #standorte { position: relative; }
+      #standorte { position: relative; overflow: hidden; }
 
       .standorte-inner {
         padding: 0;
@@ -1587,28 +1676,48 @@
       .standorte-carousel {
         perspective: none;
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x;
+        gap: 0.9rem;
+        padding: 0.5rem 1.4rem 1.2rem;
+        scroll-padding-left: 1.4rem;
         margin-top: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
+
+      .standorte-carousel::-webkit-scrollbar { display: none; }
 
       .standort-card {
         position: relative;
+        top: auto;
         left: 0;
-        width: 100%;
+        flex: 0 0 calc(100vw - 2.8rem);
+        max-width: 390px;
         height: auto;
         grid-template-columns: 1fr;
-        border: none;
-        border-top: 1px solid oklch(55% 0.02 52 / 0.35);
-        border-bottom: 1px solid oklch(55% 0.02 52 / 0.35);
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        background: oklch(40% 0.024 52);
+        border: 1px solid oklch(55% 0.02 52 / 0.25);
+        margin: 0;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
       }
 
-      .standort-img { aspect-ratio: 21/8; }
+      .standort-card:last-child {
+        margin-right: 1.4rem;
+      }
 
-      .standort-body { padding: 1.3rem 1.4rem; }
+      .standort-img { aspect-ratio: 16/9; }
+
+      .standort-body { padding: 1.4rem 1.4rem 1.6rem; }
 
       .standort-name {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
         margin-bottom: 0.6rem;
       }
 
@@ -1631,7 +1740,10 @@
         padding: 0.95rem 2rem;
       }
 
-      .standort-dots { display: none; }
+      .standort-dots {
+        display: flex;
+        padding: 0.4rem 0 0;
+      }
 
       /* --- CONTACT --- */
       .contact-inner {
@@ -1669,22 +1781,22 @@
         gap: 0.6rem;
         text-align: center;
         padding: 1.8rem 1.4rem;
-        /* clearance for the fixed bottom CTA bar */
-        padding-bottom: calc(1.8rem + 58px);
+        /* clearance for the floating corner CTA */
+        padding-bottom: calc(1.8rem + 70px);
       }
 
-      /* --- FLOATING CTA — full-width bottom bar --- */
+      /* --- FLOATING CTA — corner button --- */
       .floating-cta {
-        bottom: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
+        bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+        right: 1.2rem;
+        left: auto;
+        width: auto;
         text-align: center;
-        font-size: 0.9rem;
-        letter-spacing: 0.14em;
-        padding: 1rem 1.5rem;
-        padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
-        box-shadow: 0 -4px 24px oklch(0% 0 0 / 0.35);
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        box-shadow: 0 6px 20px oklch(0% 0 0 / 0.4);
       }
 
       /* --- BOOKING MODAL — bottom sheet --- */
@@ -1725,11 +1837,25 @@
 
     /* Small phones */
     @media (max-width: 380px) {
+      #hero { min-height: 610px; }
+      #hero-title { top: 4.8rem; }
       #hero-title h1 { font-size: 3rem; }
+      .hero-tagline { font-size: 0.58rem; margin-top: 0.45rem; }
+      #hero-face { top: 12rem; right: 2.5rem; height: 54%; }
       .section-title { font-size: 2.5rem; }
       .hero-price-row { padding: 0.55rem 0; }
-      .hero-price-name { font-size: 0.85rem; }
-      .hero-price-val { font-size: 1.05rem; }
+      .hero-price-name { font-size: 0.88rem; }
+      .hero-price-val { font-size: 1.1rem; }
+      .hero-book-row .btn-book { padding: 0.9rem 1.2rem; font-size: 0.85rem; }
+    }
+
+    /* Short viewports (e.g. landscape phones) — keep hero compact */
+    @media (max-width: 768px) and (max-height: 640px) {
+      #hero-title { top: 4.2rem; }
+      #hero-title h1 { font-size: 2.7rem; }
+      #hero-face { top: 10rem; height: 38%; }
+      .hero-price-row { padding: 0.5rem 0; }
+      .hero-book-row { margin-top: 0.7rem; }
     }
   </style>
 </head>
@@ -1806,7 +1932,7 @@
   <!-- HERO -->
   <section id="hero">
     <div id="hero-title">
-      <h1>CITY BARBERSHOP</h1>
+      <h1><span>CITY</span> <span>BARBERSHOP</span></h1>
       <p class="hero-tagline">Dein Friseur in Wien · 2 Standorte</p>
     </div>
 
@@ -2100,6 +2226,7 @@
             <p class="review-text">Immer pünktlich, immer freundlich, immer ein perfektes Ergebnis. Was will man mehr?
             </p>
           </div>
+          <div class="review-card review-card-spacer" aria-hidden="true"></div>
         </div>
         <div class="reviews-cta">
           <a href="https://www.google.com/search?q=mister+m+friseur+wien+bewertungen" target="_blank"
@@ -2392,7 +2519,7 @@
         if (heroFace) {
           applyTransition(heroFace, 0.2);
           heroFace.style.opacity = '1';
-          heroFace.style.transform = isMobile() ? 'translateX(-50%)' : 'translateX(0)';
+          heroFace.style.transform = 'translateX(0)';
         }
         if (heroPriceList) { applyTransition(heroPriceList, 0.35); heroPriceList.style.opacity = '1'; heroPriceList.style.transform = isMobile() ? 'translateX(0)' : 'translateY(-50%) translateX(0)'; }
       });
@@ -2430,8 +2557,13 @@
 
         // Nav
         if (isMobile()) {
-          nav.classList.add('visible');
-          nav.classList.toggle('solid', scrollY > 50);
+          const mobileNavOpen = nav.classList.contains('menu-open');
+          if (scrollY > 90 || mobileNavOpen) {
+            nav.classList.add('visible');
+            nav.classList.toggle('solid', scrollY > 120 && !mobileNavOpen);
+          } else {
+            nav.classList.remove('visible', 'solid');
+          }
         } else {
           if (scrollY > heroH * 0.15) { nav.classList.add('visible'); nav.classList.toggle('solid', scrollY > heroH * 0.4); }
           else nav.classList.remove('visible', 'solid');
@@ -2441,7 +2573,7 @@
         if (heroFace) {
           heroFace.style.transition = noTrans;
           if (isMobile()) {
-            heroFace.style.transform = `translateX(-50%) translateY(${progress * -15}px)`;
+            heroFace.style.transform = `translateY(${progress * -15}px)`;
           } else {
             heroFace.style.transform = `translateX(${progress * -10}%)`;
           }
@@ -2460,6 +2592,27 @@
           heroTitle.style.transition = noTrans;
           heroTitle.style.transform = `translateY(${progress * -30}px)`;
           heroTitle.style.opacity = Math.max(0, 1 - progress * 1.3);
+        }
+
+        if (isMobile()) {
+          document.querySelectorAll([
+            '#content .section-label',
+            '#content .section-title',
+            '.price-item',
+            '.prices-cta',
+            '.about-text',
+            '.about-img-placeholder',
+            '.gallery-item',
+            '.review-card',
+            '.reviews-cta',
+            '.standort-card',
+            '.contact-text',
+            '.contact-booking'
+          ].join(',')).forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          });
+          return;
         }
 
         // -- PRICES: scroll-bound slide in from left/right --
@@ -2575,9 +2728,14 @@
         });
         const reviewsCta = document.querySelector('.reviews-cta');
         if (reviewsCta) {
-          const p = clamp01((rp - 0.8) * 5);
-          reviewsCta.style.opacity = p;
-          reviewsCta.style.transform = `translateY(${(1 - p) * 20}px)`;
+          if (isMobile()) {
+            reviewsCta.style.opacity = '';
+            reviewsCta.style.transform = '';
+          } else {
+            const p = clamp01((rp - 0.8) * 5);
+            reviewsCta.style.opacity = p;
+            reviewsCta.style.transform = `translateY(${(1 - p) * 20}px)`;
+          }
         }
 
         // -- STANDORTE: scroll-driven carousel --
@@ -2605,14 +2763,13 @@
         const dot2 = document.getElementById('dot-2');
         if (card1 && card2) {
           if (isMobile()) {
-            // On mobile: simple fade-in, no carousel
-            const mobileP = clamp01((sp_enter - 0.3) * 2.5);
-            card1.style.opacity = mobileP;
-            card1.style.transform = `translateY(${(1 - mobileP) * 25}px)`;
+            // On mobile: native horizontal swipe — let CSS drive layout
+            card1.style.opacity = '';
+            card1.style.transform = '';
             card1.style.filter = '';
             card1.style.zIndex = '';
-            card2.style.opacity = mobileP;
-            card2.style.transform = `translateY(${(1 - mobileP) * 40}px)`;
+            card2.style.opacity = '';
+            card2.style.transform = '';
             card2.style.filter = '';
             card2.style.zIndex = '';
           } else {
@@ -2676,6 +2833,22 @@
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // -- STANDORTE mobile swipe: sync dots --
+    const standorteCarousel = document.querySelector('.standorte-carousel');
+    if (standorteCarousel) {
+      standorteCarousel.addEventListener('scroll', () => {
+        if (!isMobile()) return;
+        const dot1m = document.getElementById('dot-1');
+        const dot2m = document.getElementById('dot-2');
+        if (!dot1m || !dot2m) return;
+        const half = standorteCarousel.scrollWidth / 2;
+        const past = standorteCarousel.scrollLeft + standorteCarousel.clientWidth / 2;
+        const onSecond = past >= half;
+        dot1m.classList.toggle('active', !onSecond);
+        dot2m.classList.toggle('active', onSecond);
+      }, { passive: true });
+    }
 
     // -- FLOATING CTA: scroll-driven flight from hero to corner --
     const floatingCta = document.getElementById('floating-cta');
