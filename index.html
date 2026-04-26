@@ -1182,43 +1182,443 @@
       color: var(--text-dark);
     }
 
-    /* -- RESPONSIVE -- */
+    /* ==================== */
+    /* -- HAMBURGER BTN -- */
+    /* ==================== */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-light);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav-burger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-burger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-burger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Nav above overlay when menu open */
+    nav.menu-open {
+      z-index: 106;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+      background: transparent !important;
+      backdrop-filter: none !important;
+    }
+
+    nav.menu-open .nav-logo {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* -- MOBILE NAV OVERLAY -- */
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 105;
+      background: oklch(24% 0.02 52 / 0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .mobile-nav-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-nav-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .mobile-nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: 0.12em;
+      color: var(--text-light);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .mobile-nav-logo span {
+      color: var(--amber);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .mobile-nav-links a {
+      color: oklch(85% 0.01 65);
+      text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      transition: color 0.2s;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--amber);
+    }
+
+    .mobile-nav-cta {
+      color: var(--amber) !important;
+      border: 1px solid var(--amber);
+      padding: 0.6rem 1.8rem !important;
+      margin-top: 0.5rem;
+    }
+
+    .mobile-nav-socials {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .mobile-nav-socials a {
+      color: oklch(70% 0.01 65);
+      transition: color 0.2s;
+    }
+
+    .mobile-nav-socials a:hover {
+      color: var(--amber);
+    }
+
+    .mobile-nav-socials svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* =============================== */
+    /* -- MOBILE VIEW COMPLETE REWORK -- */
+    /* =============================== */
     @media (max-width: 768px) {
-      #hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: 45vh 1fr;
+
+      /* --- NAV --- */
+      .nav-links, .nav-socials { display: none; }
+      .nav-burger { display: flex; }
+      .mobile-nav-overlay { display: flex; }
+      nav { padding: 0.9rem 1.2rem; }
+      .nav-logo { font-size: 1.15rem; }
+
+      /* --- HERO --- */
+      #hero { min-height: 100svh; }
+      #hero-spacer { height: 100svh; min-height: unset; }
+
+      #hero-title {
+        left: 1.2rem;
+        right: 1.2rem;
+        top: 0;
       }
+
+      #hero-title h1 {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+        white-space: normal;
+        line-height: 0.92;
+      }
+
+      .hero-tagline {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+      }
+
+      #hero-face {
+        left: 50%;
+        transform: translateX(-50%);
+        height: 65%;
+        bottom: auto;
+        top: 12%;
+      }
+
+      #hero::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 55%;
+        background: linear-gradient(to top, oklch(28% 0.02 52 / 0.95) 0%, oklch(32% 0.02 52 / 0.7) 50%, transparent 100%);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      #hero-price-list {
+        right: 1.2rem; left: 1.2rem;
+        top: auto; bottom: 1.5rem;
+        width: auto; min-width: unset;
+        transform: none;
+        z-index: 4;
+      }
+
+      .hero-prices-label { font-size: 0.6rem; }
+      .hero-price-row { padding: 0.55rem 0; }
+      .hero-price-name { font-size: 0.85rem; }
+      .hero-price-val { font-size: 1.1rem; }
+      .hero-book-row { margin-top: 0.6rem; }
+
+      .hero-book-row .btn-book {
+        width: 100%;
+        justify-content: center;
+        padding: 0.7rem 1.5rem;
+      }
+
+      /* --- DISABLE STICKY — normal scroll flow --- */
+      .sticky-section {
+        position: relative;
+        min-height: auto;
+        padding: 3.5rem 0;
+      }
+
+      #content {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* --- SHARED TYPOGRAPHY --- */
+      .section-label {
+        font-size: 0.62rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+        margin-bottom: 1.5rem;
+      }
+
+      /* --- PRICES --- */
+      .prices-inner { padding: 0 1.2rem; }
 
       .prices-grid {
         grid-template-columns: 1fr;
+        gap: 0;
       }
 
-      .about-inner,
-      .contact-inner {
+      .price-item { padding: 0.6rem 0; }
+      .pi-name { font-size: 0.88rem; }
+      .pi-desc { font-size: 0.72rem; }
+      .pi-price { font-size: 1.05rem; }
+
+      .price-item.featured {
+        padding: 0.6rem 1rem;
+        margin: 0.2rem -1rem;
+      }
+
+      .prices-cta { margin-top: 2rem; }
+
+      /* --- ABOUT --- */
+      .about-inner {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 1.8rem;
+        padding: 0 1.2rem;
       }
 
-      .nav-links {
-        display: none;
+      .about-text p {
+        font-size: 0.88rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.65;
       }
+
+      .about-img-placeholder {
+        aspect-ratio: 16/10;
+      }
+
+      /* --- GALLERY --- */
+      .gallery-inner { padding: 0 1.2rem; }
 
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+        gap: 3px;
       }
 
-      .floating-cta {
-        bottom: 1.2rem;
-        right: 1.2rem;
+      .gallery-item {
+        aspect-ratio: 1;
       }
 
-      .booking-card {
-        padding: 2rem 1.5rem 1.5rem;
+      /* --- REVIEWS — horizontal swipe --- */
+      .reviews-inner { padding: 0; }
+
+      .reviews-inner .section-label,
+      .reviews-inner .section-title {
+        padding-left: 1.2rem;
       }
 
-      .booking-row {
+      .reviews-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 0.8rem;
+        padding: 0.5rem 1.2rem 1rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .reviews-grid::-webkit-scrollbar { display: none; }
+
+      .review-card {
+        flex: 0 0 80vw;
+        scroll-snap-align: center;
+        padding: 1.2rem;
+      }
+
+      .review-text { font-size: 0.84rem; line-height: 1.55; }
+      .review-header { gap: 0.6rem; }
+      .review-avatar { width: 32px; height: 32px; font-size: 0.85rem; }
+
+      .reviews-cta {
+        padding: 0 1.2rem;
+        margin-top: 1.5rem;
+      }
+
+      /* --- STANDORTE — stacked cards, no carousel --- */
+      #standorte-wrapper {
+        height: auto;
+      }
+
+      #standorte {
+        position: relative;
+      }
+
+      .standorte-inner {
+        padding: 0 1.2rem;
+        height: auto;
+      }
+
+      .standorte-carousel {
+        perspective: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .standort-card {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: auto;
         grid-template-columns: 1fr;
+        border: 1px solid oklch(55% 0.02 52 / 0.3);
       }
+
+      .standort-img {
+        aspect-ratio: 16/9;
+      }
+
+      .standort-body {
+        padding: 1.5rem;
+      }
+
+      .standort-name {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .standort-info {
+        font-size: 0.88rem;
+        line-height: 1.8;
+      }
+
+      .standort-info strong {
+        font-size: 0.7rem;
+        margin-top: 0.8rem;
+      }
+
+      .standort-dots { display: none; }
+
+      /* --- CONTACT --- */
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1.2rem;
+      }
+
+      .contact-text .section-title { margin-bottom: 1rem; }
+      .contact-info { margin-bottom: 1.5rem; }
+      .contact-info-row { margin-bottom: 0.8rem; font-size: 0.9rem; }
+
+      .contact-socials {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 1rem;
+      }
+
+      .social-btn {
+        font-size: 0.68rem;
+        padding: 0.5rem 0.8rem;
+      }
+
+      .contact-booking {
+        display: none;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        flex-direction: column;
+        gap: 0.6rem;
+        text-align: center;
+        padding: 1.5rem 1.2rem;
+      }
+
+      /* --- FLOATING CTA --- */
+      .floating-cta {
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 0.75rem;
+        padding: 0.65rem 1.4rem;
+      }
+
+      /* --- BOOKING MODAL --- */
+      .booking-card {
+        padding: 1.8rem 1.2rem 1.5rem;
+        width: 95%;
+      }
+
+      .booking-row { grid-template-columns: 1fr; }
+      .booking-card h3 { font-size: 1.3rem; }
+    }
+
+    /* Small phones */
+    @media (max-width: 380px) {
+      #hero-title h1 { font-size: 2.4rem; }
+      .section-title { font-size: 1.8rem; }
+      .hero-price-row { padding: 0.5rem 0; }
+      .hero-price-name { font-size: 0.78rem; }
+      .hero-price-val { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -1260,7 +1660,37 @@
         </svg>
       </a>
     </div>
+    <!-- Hamburger -->
+    <button class="nav-burger" id="nav-burger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+    <div class="mobile-nav-content">
+      <a href="#hero" class="mobile-nav-logo">CITY <span>BARBERSHOP</span></a>
+      <ul class="mobile-nav-links">
+        <li><a href="#about">Über uns</a></li>
+        <li><a href="#prices">Preise</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#standorte">Standorte</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+        <li><a href="javascript:void(0)" onclick="closeMobileNav();openBooking();" class="mobile-nav-cta">Termin buchen</a></li>
+      </ul>
+      <div class="mobile-nav-socials">
+        <a href="https://www.instagram.com/mister.m.friseur/" target="_blank" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@1030misterm" target="_blank" title="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/people/Mr-M/100085018824015/" target="_blank" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
@@ -1787,12 +2217,51 @@
   </footer>
 
   <script>
+    // -- Mobile nav --
+    const navBurger = document.getElementById('nav-burger');
+    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+    const nav = document.getElementById('main-nav');
+
+    function openMobileNav() {
+      navBurger.classList.add('open');
+      mobileNavOverlay.classList.add('open');
+      nav.classList.add('menu-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      navBurger.classList.remove('open');
+      mobileNavOverlay.classList.remove('open');
+      nav.classList.remove('menu-open');
+      document.body.style.overflow = '';
+    }
+
+    navBurger.addEventListener('click', () => {
+      if (mobileNavOverlay.classList.contains('open')) closeMobileNav();
+      else openMobileNav();
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileNav();
+      });
+    });
+
+    // Close mobile nav on overlay background click (anywhere except links)
+    mobileNavOverlay.addEventListener('click', (e) => {
+      if (!e.target.closest('a, button')) closeMobileNav();
+    });
+
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
     // -- Entrance animations --
     const heroFace = document.getElementById('hero-face');
     const heroPriceList = document.getElementById('hero-price-list');
     const heroTitle = document.getElementById('hero-title');
     const heroTitleH1 = heroTitle ? heroTitle.querySelector('h1') : null;
-    const nav = document.getElementById('main-nav');
     const heroSection = document.getElementById('hero');
 
     function applyTransition(el, delay) {
@@ -1803,8 +2272,12 @@
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         if (heroTitle) { applyTransition(heroTitle, 0.1); heroTitle.style.opacity = '1'; heroTitle.style.transform = 'translateY(0)'; }
-        if (heroFace) { applyTransition(heroFace, 0.2); heroFace.style.opacity = '1'; heroFace.style.transform = 'translateX(0)'; }
-        if (heroPriceList) { applyTransition(heroPriceList, 0.35); heroPriceList.style.opacity = '1'; heroPriceList.style.transform = 'translateY(-50%) translateX(0)'; }
+        if (heroFace) {
+          applyTransition(heroFace, 0.2);
+          heroFace.style.opacity = '1';
+          heroFace.style.transform = isMobile() ? 'translateX(-50%)' : 'translateX(0)';
+        }
+        if (heroPriceList) { applyTransition(heroPriceList, 0.35); heroPriceList.style.opacity = '1'; heroPriceList.style.transform = isMobile() ? 'translateX(0)' : 'translateY(-50%) translateX(0)'; }
       });
     });
 
@@ -1839,18 +2312,31 @@
         const progress = clamp01(scrollY / (heroH * 0.85));
 
         // Nav
-        if (scrollY > heroH * 0.15) { nav.classList.add('visible'); nav.classList.toggle('solid', scrollY > heroH * 0.4); }
-        else nav.classList.remove('visible', 'solid');
+        if (isMobile()) {
+          nav.classList.add('visible');
+          nav.classList.toggle('solid', scrollY > 50);
+        } else {
+          if (scrollY > heroH * 0.15) { nav.classList.add('visible'); nav.classList.toggle('solid', scrollY > heroH * 0.4); }
+          else nav.classList.remove('visible', 'solid');
+        }
 
         const noTrans = 'opacity 0s, transform 0s';
         if (heroFace) {
           heroFace.style.transition = noTrans;
-          heroFace.style.transform = `translateX(${progress * -10}%)`;
+          if (isMobile()) {
+            heroFace.style.transform = `translateX(-50%) translateY(${progress * -15}px)`;
+          } else {
+            heroFace.style.transform = `translateX(${progress * -10}%)`;
+          }
           heroFace.style.opacity = Math.max(0, 1 - progress * 1.2);
         }
         if (heroPriceList) {
           heroPriceList.style.transition = noTrans;
-          heroPriceList.style.transform = `translateY(-50%) translateX(${progress * 60}px)`;
+          if (isMobile()) {
+            heroPriceList.style.transform = `translateY(${progress * 30}px)`;
+          } else {
+            heroPriceList.style.transform = `translateY(-50%) translateX(${progress * 60}px)`;
+          }
           heroPriceList.style.opacity = Math.max(0, 1 - progress * 1.2);
         }
         if (heroTitle) {
@@ -1878,14 +2364,14 @@
           const adjusted = clamp01((pp - 0.35) / 0.6);
           const p = stagger(adjusted, i, leftItems.length, 0.5);
           el.style.opacity = p;
-          el.style.transform = `translateX(${(1 - p) * -80}px)`;
+          el.style.transform = isMobile() ? `translateY(${(1 - p) * 15}px)` : `translateX(${(1 - p) * -80}px)`;
         });
         const rightItems = document.querySelectorAll('.prices-grid > div:last-child .price-item');
         rightItems.forEach((el, i) => {
           const adjusted = clamp01((pp - 0.35) / 0.6);
           const p = stagger(adjusted, i, rightItems.length, 0.5);
           el.style.opacity = p;
-          el.style.transform = `translateX(${(1 - p) * 80}px)`;
+          el.style.transform = isMobile() ? `translateY(${(1 - p) * 15}px)` : `translateX(${(1 - p) * 80}px)`;
         });
         // CTA
         const ctaEl = document.getElementById('prices-cta');
@@ -1911,13 +2397,13 @@
         if (aboutText) {
           const p = clamp01((ap - 0.3) * 2);
           aboutText.style.opacity = p;
-          aboutText.style.transform = `translateX(${(1 - p) * -60}px)`;
+          aboutText.style.transform = isMobile() ? `translateY(${(1 - p) * 30}px)` : `translateX(${(1 - p) * -60}px)`;
         }
         const aboutImg = document.querySelector('.about-img-placeholder');
         if (aboutImg) {
           const p = clamp01((ap - 0.4) * 2);
           aboutImg.style.opacity = p;
-          aboutImg.style.transform = `translateX(${(1 - p) * 60}px)`;
+          aboutImg.style.transform = isMobile() ? `translateY(${(1 - p) * 30}px)` : `translateX(${(1 - p) * 60}px)`;
         }
 
         // -- GALLERY: scroll-bound, first item scales up --
@@ -1961,10 +2447,14 @@
         reviewCards.forEach((el, i) => {
           const adjusted = clamp01((rp - 0.35) / 0.6);
           const p = stagger(adjusted, i, reviewCards.length, 0.5);
-          // Alternate: odd from left, even from right
-          const dir = i % 2 === 0 ? -1 : 1;
-          el.style.opacity = p;
-          el.style.transform = `translateX(${(1 - p) * dir * 60}px)`;
+          if (isMobile()) {
+            el.style.opacity = p;
+            el.style.transform = `translateY(${(1 - p) * 20}px)`;
+          } else {
+            const dir = i % 2 === 0 ? -1 : 1;
+            el.style.opacity = p;
+            el.style.transform = `translateX(${(1 - p) * dir * 60}px)`;
+          }
         });
         const reviewsCta = document.querySelector('.reviews-cta');
         if (reviewsCta) {
@@ -1997,35 +2487,46 @@
         const dot1 = document.getElementById('dot-1');
         const dot2 = document.getElementById('dot-2');
         if (card1 && card2) {
-          const enterP = clamp01((sp_enter - 0.4) * 2.5);
-          const tLinear = clamp01((sp_slide - 0.1) / 0.7);
-          const t = tLinear < 0.5
-            ? 2 * tLinear * tLinear
-            : 1 - Math.pow(-2 * tLinear + 2, 2) / 2;
+          if (isMobile()) {
+            // On mobile: simple fade-in, no carousel
+            const mobileP = clamp01((sp_enter - 0.3) * 2.5);
+            card1.style.opacity = mobileP;
+            card1.style.transform = `translateY(${(1 - mobileP) * 25}px)`;
+            card1.style.filter = '';
+            card1.style.zIndex = '';
+            card2.style.opacity = mobileP;
+            card2.style.transform = `translateY(${(1 - mobileP) * 40}px)`;
+            card2.style.filter = '';
+            card2.style.zIndex = '';
+          } else {
+            const enterP = clamp01((sp_enter - 0.4) * 2.5);
+            const tLinear = clamp01((sp_slide - 0.1) / 0.7);
+            const t = tLinear < 0.5
+              ? 2 * tLinear * tLinear
+              : 1 - Math.pow(-2 * tLinear + 2, 2) / 2;
 
-          // Card 1: center → left side shelf
-          const x1 = t * -32;
-          const z1 = t * -150;
-          const ry1 = t * 28;
-          const s1 = 1 - t * 0.15;
-          card1.style.opacity = enterP;
-          card1.style.transform = `translateX(${x1}%) translateZ(${z1}px) rotateY(${ry1}deg) scale(${s1})`;
-          card1.style.zIndex = t < 0.5 ? '2' : '1';
-          card1.style.filter = `brightness(${1 - t * 0.35})`;
+            const x1 = t * -32;
+            const z1 = t * -150;
+            const ry1 = t * 28;
+            const s1 = 1 - t * 0.15;
+            card1.style.opacity = enterP;
+            card1.style.transform = `translateX(${x1}%) translateZ(${z1}px) rotateY(${ry1}deg) scale(${s1})`;
+            card1.style.zIndex = t < 0.5 ? '2' : '1';
+            card1.style.filter = `brightness(${1 - t * 0.35})`;
 
-          // Card 2: right side shelf → center
-          const x2 = (1 - t) * 32;
-          const z2 = (1 - t) * -150;
-          const ry2 = (1 - t) * -28;
-          const s2 = 0.85 + t * 0.15;
-          card2.style.opacity = enterP;
-          card2.style.transform = `translateX(${x2}%) translateZ(${z2}px) rotateY(${ry2}deg) scale(${s2})`;
-          card2.style.zIndex = t < 0.5 ? '1' : '2';
-          card2.style.filter = `brightness(${0.65 + t * 0.35})`;
+            const x2 = (1 - t) * 32;
+            const z2 = (1 - t) * -150;
+            const ry2 = (1 - t) * -28;
+            const s2 = 0.85 + t * 0.15;
+            card2.style.opacity = enterP;
+            card2.style.transform = `translateX(${x2}%) translateZ(${z2}px) rotateY(${ry2}deg) scale(${s2})`;
+            card2.style.zIndex = t < 0.5 ? '1' : '2';
+            card2.style.filter = `brightness(${0.65 + t * 0.35})`;
 
-          if (dot1 && dot2) {
-            dot1.classList.toggle('active', t < 0.5);
-            dot2.classList.toggle('active', t >= 0.5);
+            if (dot1 && dot2) {
+              dot1.classList.toggle('active', t < 0.5);
+              dot2.classList.toggle('active', t >= 0.5);
+            }
           }
         }
 
@@ -2045,7 +2546,7 @@
         if (contactText) {
           const p = clamp01((cp - 0.3) * 2);
           contactText.style.opacity = p;
-          contactText.style.transform = `translateX(${(1 - p) * -60}px)`;
+          contactText.style.transform = isMobile() ? `translateY(${(1 - p) * 30}px)` : `translateX(${(1 - p) * -60}px)`;
         }
         const contactBooking = document.querySelector('.contact-booking');
         if (contactBooking) {
@@ -2067,11 +2568,17 @@
     // After entrance animation, swap hero button for the floating CTA
     setTimeout(() => {
       if (heroBookBtn && floatingCta) {
-        const r = heroBookBtn.getBoundingClientRect();
-        heroBtnOriginX = r.left;
-        heroBtnOriginY = r.top;
-        heroBookBtn.style.visibility = 'hidden';
+        if (!isMobile()) {
+          const r = heroBookBtn.getBoundingClientRect();
+          heroBtnOriginX = r.left;
+          heroBtnOriginY = r.top;
+          heroBookBtn.style.visibility = 'hidden';
+        }
         floatingCta.classList.add('active');
+        if (isMobile()) {
+          floatingCta.style.opacity = '0';
+          floatingCta.style.pointerEvents = 'none';
+        }
         ctaReady = true;
         positionFloatingCta();
       }
@@ -2079,6 +2586,18 @@
 
     function positionFloatingCta() {
       if (!ctaReady || !floatingCta) return;
+
+      // On mobile: just show/hide based on scroll, no fly-in
+      if (isMobile()) {
+        const scrollY = window.scrollY;
+        const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
+        const show = scrollY > heroH * 0.3;
+        floatingCta.style.transform = '';
+        floatingCta.style.opacity = show ? '1' : '0';
+        floatingCta.style.pointerEvents = show ? 'all' : 'none';
+        floatingCta.classList.toggle('docked', show);
+        return;
+      }
 
       const heroH = heroSection ? heroSection.offsetHeight : window.innerHeight;
       const scrollY = window.scrollY;
@@ -2111,14 +2630,14 @@
 
     window.addEventListener('scroll', positionFloatingCta, { passive: true });
     window.addEventListener('resize', () => {
-      if (heroBookBtn) {
+      if (heroBookBtn && !isMobile()) {
         heroBookBtn.style.visibility = '';
         const r = heroBookBtn.getBoundingClientRect();
         heroBtnOriginX = r.left;
         heroBtnOriginY = r.top;
         heroBookBtn.style.visibility = 'hidden';
-        positionFloatingCta();
       }
+      positionFloatingCta();
     });
 
     // -- BOOKING MODAL --
