@@ -1180,6 +1180,195 @@
       transform: none;
     }
 
+    /* ---- 3-Step Wizard Styles ---- */
+
+    /* Progress bar */
+    .booking-steps {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 1.6rem;
+    }
+    .step-dot {
+      height: 3px;
+      flex: 1;
+      background: #333;
+      border-radius: 2px;
+      transition: background 0.4s ease;
+    }
+    .step-dot.active { background: var(--amber); }
+    .step-dot.done   { background: #8a4a20; }
+
+    /* Step header meta */
+    .booking-step-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+    .booking-step-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    /* Slide container */
+    .booking-steps-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .booking-step {
+      width: 100%;
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .booking-step.slide-in-right { animation: slideInRight 0.28s cubic-bezier(0.22,1,0.36,1) both; }
+    .booking-step.slide-in-left  { animation: slideInLeft  0.28s cubic-bezier(0.22,1,0.36,1) both; }
+
+    /* Summary chip — shows previous step choices */
+    .booking-summary-chip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+      min-height: 0;
+    }
+    .booking-summary-chip span {
+      background: #2c2c2c;
+      border: 1px solid #444;
+      color: #c8a46e;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* Location pill toggle */
+    .location-pills {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .loc-pill {
+      flex: 1;
+      padding: 0.75rem 0.5rem;
+      background: #2a2a2a;
+      border: 1px solid #494949;
+      color: #999;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      border-radius: 2px;
+    }
+    .loc-pill.active {
+      background: rgba(220,53,69,0.1);
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    /* Time chip grid */
+    .time-chips {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.4rem;
+      max-height: 180px;
+      overflow-y: auto;
+      padding-right: 2px;
+      scrollbar-width: thin;
+      scrollbar-color: #444 transparent;
+    }
+    .time-chip {
+      padding: 0.55rem 0.3rem;
+      background: #2a2a2a;
+      border: 1px solid #484848;
+      color: #ccc;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+      border-radius: 2px;
+      user-select: none;
+    }
+    .time-chip:hover  { border-color: #888; color: #fff; }
+    .time-chip.active {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: #111;
+      font-weight: 700;
+    }
+
+    /* Step navigation (back + next row) */
+    .booking-nav {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+    .btn-step-back {
+      padding: 0.9rem 1.1rem;
+      background: #222;
+      border: 1px solid #555;
+      color: #aaa;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-step-back:hover { border-color: var(--amber); color: var(--amber); }
+    .booking-nav .booking-submit { flex: 1; margin-top: 0; }
+
+    /* ---- Mobile bottom sheet ---- */
+    @media (max-width: 600px) {
+      .booking-overlay {
+        align-items: flex-end;
+      }
+      .booking-card {
+        width: 100%;
+        max-width: 100%;
+        max-height: 88vh;
+        padding: 1.4rem 1.1rem 2rem;
+        border-radius: 14px 14px 0 0;
+        transform: translateY(100%);
+        transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .booking-overlay.open .booking-card {
+        transform: translateY(0);
+      }
+      /* Drag handle hint */
+      .booking-card::before {
+        content: '';
+        display: block;
+        width: 36px;
+        height: 4px;
+        background: #444;
+        border-radius: 2px;
+        margin: 0 auto 1.1rem;
+      }
+      .booking-card h3 { font-size: 1.3rem; margin-bottom: 0.2rem; }
+      .booking-card .booking-subtitle { margin-bottom: 1rem; }
+      .booking-field { margin-bottom: 0.9rem; }
+      .booking-row { gap: 0.6rem; }
+    }
+
     /* Confirmation state */
     .booking-confirmation {
       text-align: center;
@@ -1822,12 +2011,13 @@
       .booking-overlay { align-items: flex-end; }
 
       .booking-card {
-        padding: 0 1.4rem 1.5rem;
+        padding: 0 1.3rem 1.6rem;
         width: 100%;
         max-width: 100%;
-        max-height: 92vh;
+        max-height: 88vh;
         transform: translateY(100%);
         transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        border-radius: 16px 16px 0 0;
       }
 
       /* Drag handle */
@@ -1836,22 +2026,21 @@
         display: block;
         width: 36px;
         height: 4px;
-        background: #666666;
+        background: #555;
         border-radius: 2px;
-        margin: 1.2rem auto 1.4rem;
+        margin: 1rem auto 1.2rem;
       }
 
       .booking-overlay.open .booking-card {
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
       }
 
-      .booking-row { grid-template-columns: 1fr; }
-      .booking-card h3 { font-size: 1.4rem; }
-
-      .booking-submit {
-        padding: 1rem;
-        font-size: 0.95rem;
-      }
+      .booking-card h3 { font-size: 1.3rem; margin-bottom: 0.15rem; }
+      .booking-card .booking-subtitle { font-size: 0.78rem; margin-bottom: 1rem; }
+      .booking-field { margin-bottom: 0.85rem; }
+      .time-chips { grid-template-columns: repeat(4,1fr); max-height: 160px; }
+      .booking-steps { margin-bottom: 1.2rem; }
+      .booking-submit { padding: 0.95rem; font-size: 0.9rem; }
     }
 
     /* Small phones */
@@ -2384,71 +2573,110 @@
     <div class="booking-card" id="booking-card">
       <button class="booking-close" onclick="closeBooking()">&times;</button>
 
-      <!-- FORM -->
-      <div id="booking-form-view">
-        <h3>Termin buchen</h3>
-        <p class="booking-subtitle">Wähle deinen Service und Wunschtermin</p>
+      <!-- Step progress bar -->
+      <div class="booking-steps">
+        <div class="step-dot active" id="bdot-1"></div>
+        <div class="step-dot" id="bdot-2"></div>
+        <div class="step-dot" id="bdot-3"></div>
+      </div>
 
-        <div class="booking-field">
-          <label for="booking-service">Service</label>
-          <select id="booking-service">
-            <option value="">Bitte wählen…</option>
-            <option value="Schneiden & Föhnen — 17 €">Schneiden & Föhnen — 17 €</option>
-            <option value="Schneiden, Waschen & Styling — 22 €">Schneiden, Waschen & Styling — 22 €</option>
-            <option value="Haarschnitt, Rasur & Föhnen — 27 €">Haarschnitt, Rasur & Föhnen — 27 €</option>
-            <option value="Haarschnitt, Modellrasur & Föhnen — 27 €">Haarschnitt, Modellrasur & Föhnen — 27 €</option>
-            <option value="Rasieren — 10 €">Rasieren — 10 €</option>
-            <option value="Modellrasur — 12 €">Modellrasur — 12 €</option>
-            <option value="Fullservice — 42 €">Fullservice — 42 €</option>
-            <option value="Haar-Farben — ab 30 €">Haar-Farben — ab 30 €</option>
-            <option value="Kreatin-Protein — ab 100 €">Kreatin-Protein — ab 100 €</option>
-            <option value="Dauerwelle — ab 45 €">Dauerwelle — ab 45 €</option>
-            <option value="Kinderhaarschnitt bis 8 Jahre — 12 €">Kinderhaarschnitt bis 8 Jahre — 12 €</option>
-            <option value="Kinderhaarschnitt ab 8 Jahre — 17 €">Kinderhaarschnitt ab 8 Jahre — 17 €</option>
-            <option value="Augenbrauen Zupfen — 7 €">Augenbrauen Zupfen — 7 €</option>
-            <option value="Heißwachs — 8 €">Heißwachs — 8 €</option>
-          </select>
+      <!-- FORM STEPS -->
+      <div class="booking-steps-wrapper" id="booking-form-view">
+
+        <!-- Step 1: Was & Wo -->
+        <div class="booking-step" id="booking-step-1">
+          <div class="booking-step-meta"><span class="booking-step-num">Schritt 1 von 3</span></div>
+          <h3>Was &amp; Wo?</h3>
+          <p class="booking-subtitle">Wähle deinen Service und Standort</p>
+
+          <div class="booking-field">
+            <label for="booking-service">Service</label>
+            <select id="booking-service">
+              <option value="">Bitte wählen…</option>
+              <option value="Schneiden &amp; Föhnen — 17 €">Schneiden &amp; Föhnen — 17 €</option>
+              <option value="Schneiden, Waschen &amp; Styling — 22 €">Schneiden, Waschen &amp; Styling — 22 €</option>
+              <option value="Haarschnitt, Rasur &amp; Föhnen — 27 €">Haarschnitt, Rasur &amp; Föhnen — 27 €</option>
+              <option value="Haarschnitt, Modellrasur &amp; Föhnen — 27 €">Haarschnitt, Modellrasur &amp; Föhnen — 27 €</option>
+              <option value="Rasieren — 10 €">Rasieren — 10 €</option>
+              <option value="Modellrasur — 12 €">Modellrasur — 12 €</option>
+              <option value="Fullservice — 42 €">Fullservice — 42 €</option>
+              <option value="Haar-Farben — ab 30 €">Haar-Farben — ab 30 €</option>
+              <option value="Kreatin-Protein — ab 100 €">Kreatin-Protein — ab 100 €</option>
+              <option value="Dauerwelle — ab 45 €">Dauerwelle — ab 45 €</option>
+              <option value="Kinderhaarschnitt bis 8 Jahre — 12 €">Kinderhaarschnitt bis 8 Jahre — 12 €</option>
+              <option value="Kinderhaarschnitt ab 8 Jahre — 17 €">Kinderhaarschnitt ab 8 Jahre — 17 €</option>
+              <option value="Augenbrauen Zupfen — 7 €">Augenbrauen Zupfen — 7 €</option>
+              <option value="Heißwachs — 8 €">Heißwachs — 8 €</option>
+            </select>
+          </div>
+
+          <div class="booking-field">
+            <label>Standort</label>
+            <div class="location-pills">
+              <button type="button" class="loc-pill active" id="pill-loc-1" onclick="selectLoc('City Barbershop', this)">City Barbershop</button>
+              <button type="button" class="loc-pill" id="pill-loc-2" onclick="selectLoc('City Barbershop 2', this)">City Barbershop 2</button>
+            </div>
+          </div>
+
+          <div class="booking-nav">
+            <button class="booking-submit" onclick="wizardNext(1)">Weiter &rarr;</button>
+          </div>
         </div>
 
-        <div class="booking-field">
-          <label for="booking-standort">Standort</label>
-          <select id="booking-standort">
-            <option value="City Barbershop">City Barbershop</option>
-            <option value="City Barbershop 2">City Barbershop 2</option>
-          </select>
-        </div>
+        <!-- Step 2: Wann -->
+        <div class="booking-step" id="booking-step-2" style="display:none;">
+          <div class="booking-step-meta"><span class="booking-step-num">Schritt 2 von 3</span></div>
+          <h3>Wann?</h3>
+          <p class="booking-subtitle">Datum und Uhrzeit wählen</p>
 
-        <div class="booking-row">
+          <div class="booking-summary-chip" id="summary-2"></div>
+
           <div class="booking-field">
             <label for="booking-date">Datum</label>
             <input type="date" id="booking-date">
           </div>
+
           <div class="booking-field">
-            <label for="booking-time">Uhrzeit</label>
-            <select id="booking-time">
-              <option value="">Bitte wählen…</option>
-            </select>
+            <label>Uhrzeit</label>
+            <div class="time-chips" id="time-chips"></div>
+          </div>
+
+          <div class="booking-nav">
+            <button class="btn-step-back" onclick="wizardBack(2)">&larr;</button>
+            <button class="booking-submit" onclick="wizardNext(2)">Weiter &rarr;</button>
           </div>
         </div>
 
-        <div class="booking-field">
-          <label for="booking-name">Name</label>
-          <input type="text" id="booking-name" placeholder="Vor- und Nachname">
-        </div>
+        <!-- Step 3: Wer -->
+        <div class="booking-step" id="booking-step-3" style="display:none;">
+          <div class="booking-step-meta"><span class="booking-step-num">Schritt 3 von 3</span></div>
+          <h3>Fast fertig!</h3>
+          <p class="booking-subtitle">Deine Kontaktdaten</p>
 
-        <div class="booking-row">
+          <div class="booking-summary-chip" id="summary-3"></div>
+
+          <div class="booking-field">
+            <label for="booking-name">Name</label>
+            <input type="text" id="booking-name" placeholder="Vor- und Nachname">
+          </div>
+
           <div class="booking-field">
             <label for="booking-phone">Telefon</label>
             <input type="tel" id="booking-phone" placeholder="+43 ...">
           </div>
+
           <div class="booking-field">
-            <label for="booking-email">E-Mail (optional)</label>
+            <label for="booking-email">E-Mail <span style="color:#666;font-weight:300;">(optional)</span></label>
             <input type="email" id="booking-email" placeholder="mail@beispiel.at">
+          </div>
+
+          <div class="booking-nav">
+            <button class="btn-step-back" onclick="wizardBack(3)">&larr;</button>
+            <button class="booking-submit" id="booking-submit" onclick="submitBooking()">Termin bestätigen</button>
           </div>
         </div>
 
-        <button class="booking-submit" id="booking-submit" onclick="submitBooking()">Termin bestätigen</button>
-      </div>
+      </div><!-- /booking-form-view -->
 
       <!-- CONFIRMATION -->
       <div id="booking-confirm-view" style="display:none;">
@@ -3024,28 +3252,15 @@
       positionFloatingCta();
     });
 
-    // -- BOOKING MODAL --
-    const bookingOverlay = document.getElementById('booking-overlay');
-    const bookingFormView = document.getElementById('booking-form-view');
+    // -- BOOKING WIZARD --
+    const bookingOverlay   = document.getElementById('booking-overlay');
+    const bookingFormView  = document.getElementById('booking-form-view');
     const bookingConfirmView = document.getElementById('booking-confirm-view');
 
-    // Populate time slots (8:00 - 18:00, every 30 min)
-    const timeSelect = document.getElementById('booking-time');
-    for (let h = 8; h <= 17; h++) {
-      for (let m = 0; m < 60; m += 30) {
-        const hh = String(h).padStart(2, '0');
-        const mm = String(m).padStart(2, '0');
-        const opt = document.createElement('option');
-        opt.value = `${hh}:${mm}`;
-        opt.textContent = `${hh}:${mm}`;
-        timeSelect.appendChild(opt);
-      }
-    }
-    // Add 18:00 as last slot
-    const lastOpt = document.createElement('option');
-    lastOpt.value = '18:00';
-    lastOpt.textContent = '18:00';
-    timeSelect.appendChild(lastOpt);
+    // Wizard state
+    let currentStep = 1;
+    let selectedLoc = 'City Barbershop';
+    let selectedTime = '';
 
     // Set min date to today
     const dateInput = document.getElementById('booking-date');
@@ -3053,7 +3268,116 @@
     dateInput.min = today;
     dateInput.value = today;
 
+    // Build time chip grid
+    (function buildTimeChips() {
+      const wrap = document.getElementById('time-chips');
+      if (!wrap) return;
+      for (let h = 8; h <= 18; h++) {
+        const mins = h === 18 ? [0] : [0, 30];
+        mins.forEach(m => {
+          const hh = String(h).padStart(2, '0');
+          const mm = String(m).padStart(2, '0');
+          const chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = 'time-chip';
+          chip.textContent = `${hh}:${mm}`;
+          chip.dataset.val = `${hh}:${mm}`;
+          chip.addEventListener('click', function() {
+            wrap.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            selectedTime = this.dataset.val;
+          });
+          wrap.appendChild(chip);
+        });
+      }
+    })();
+
+    // Location pill selection
+    function selectLoc(loc, el) {
+      selectedLoc = loc;
+      document.querySelectorAll('.loc-pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // Step dots update
+    function updateDots(step) {
+      [1, 2, 3].forEach(i => {
+        const d = document.getElementById('bdot-' + i);
+        if (!d) return;
+        d.classList.remove('active', 'done');
+        if (i < step)  d.classList.add('done');
+        if (i === step) d.classList.add('active');
+      });
+    }
+
+    // Show a step with slide animation
+    function showStep(toStep, direction) {
+      const stepEls = [1, 2, 3].map(i => document.getElementById('booking-step-' + i));
+      stepEls.forEach(el => { if (el) el.style.display = 'none'; });
+      const target = document.getElementById('booking-step-' + toStep);
+      if (!target) return;
+      target.style.display = '';
+      target.classList.remove('slide-in-right', 'slide-in-left');
+      void target.offsetWidth; // reflow
+      target.classList.add(direction === 'forward' ? 'slide-in-right' : 'slide-in-left');
+      currentStep = toStep;
+      updateDots(toStep);
+    }
+
+    // Update summary chips
+    function updateSummary(stepId, parts) {
+      const el = document.getElementById(stepId);
+      if (!el) return;
+      el.innerHTML = parts.filter(Boolean).map(t => `<span>${t}</span>`).join('');
+    }
+
+    // Validate & advance
+    function wizardNext(fromStep) {
+      if (fromStep === 1) {
+        const svc = document.getElementById('booking-service').value;
+        if (!svc) {
+          const s = document.getElementById('booking-service');
+          s.style.borderColor = '#e74c3c';
+          setTimeout(() => s.style.borderColor = '', 1500);
+          return;
+        }
+        // Shorten service label for chip display
+        const shortSvc = svc.split('—')[0].trim();
+        updateSummary('summary-2', [shortSvc, selectedLoc]);
+        showStep(2, 'forward');
+        // Scroll top of card
+        document.getElementById('booking-card').scrollTop = 0;
+        return;
+      }
+      if (fromStep === 2) {
+        const date = dateInput.value;
+        if (!date || !selectedTime) {
+          if (!date) { dateInput.style.borderColor = '#e74c3c'; setTimeout(() => dateInput.style.borderColor = '', 1500); }
+          if (!selectedTime) {
+            const tc = document.getElementById('time-chips');
+            tc.style.outline = '1px solid #e74c3c';
+            setTimeout(() => tc.style.outline = '', 1500);
+          }
+          return;
+        }
+        const dateObj = new Date(date + 'T00:00:00');
+        const shortDate = dateObj.toLocaleDateString('de-AT', { weekday: 'short', day: 'numeric', month: 'short' });
+        const svc = document.getElementById('booking-service').value.split('—')[0].trim();
+        updateSummary('summary-3', [svc, selectedLoc, shortDate + ' · ' + selectedTime]);
+        showStep(3, 'forward');
+        document.getElementById('booking-card').scrollTop = 0;
+        return;
+      }
+    }
+
+    function wizardBack(fromStep) {
+      showStep(fromStep - 1, 'back');
+      document.getElementById('booking-card').scrollTop = 0;
+    }
+
     function openBooking() {
+      // Reset to step 1
+      showStep(1, 'forward');
       bookingFormView.style.display = '';
       bookingConfirmView.style.display = 'none';
       bookingOverlay.classList.add('open');
@@ -3070,48 +3394,37 @@
 
     function submitBooking() {
       const service = document.getElementById('booking-service').value;
-      const standort = document.getElementById('booking-standort').value;
-      const date = document.getElementById('booking-date').value;
-      const time = document.getElementById('booking-time').value;
-      const name = document.getElementById('booking-name').value.trim();
-      const phone = document.getElementById('booking-phone').value.trim();
-      const email = document.getElementById('booking-email').value.trim();
+      const date    = dateInput.value;
+      const name    = document.getElementById('booking-name').value.trim();
+      const phone   = document.getElementById('booking-phone').value.trim();
+      const email   = document.getElementById('booking-email').value.trim();
 
-      if (!service || !date || !time || !name || (!phone && !email)) {
-        // Brief highlight of empty fields
-        [['booking-service', !service], ['booking-date', !date], ['booking-time', !time],
-         ['booking-name', !name]].forEach(([id, empty]) => {
-          if (empty) {
-            const el = document.getElementById(id);
-            el.style.borderColor = '#e74c3c';
-            setTimeout(() => el.style.borderColor = '', 1500);
-          }
-        });
-        if (!phone && !email) {
-          ['booking-phone', 'booking-email'].forEach(id => {
-            const el = document.getElementById(id);
-            el.style.borderColor = '#e74c3c';
-            setTimeout(() => el.style.borderColor = '', 1500);
-          });
-        }
-        return;
+      let valid = true;
+      if (!name) {
+        const n = document.getElementById('booking-name');
+        n.style.borderColor = '#e74c3c'; setTimeout(() => n.style.borderColor = '', 1500); valid = false;
       }
+      if (!phone && !email) {
+        ['booking-phone','booking-email'].forEach(id => {
+          const el = document.getElementById(id);
+          el.style.borderColor = '#e74c3c'; setTimeout(() => el.style.borderColor = '', 1500);
+        });
+        valid = false;
+      }
+      if (!valid) return;
 
-      // Save appointment
-      const apt = { service, standort, date, time, name, phone, email, id: Date.now() };
+      const apt = { service, standort: selectedLoc, date, time: selectedTime, name, phone, email, id: Date.now() };
       appointments.push(apt);
-      console.log('Termin gespeichert:', apt, 'Alle Termine:', appointments);
+      console.log('Termin gespeichert:', apt);
 
-      // Format date for display
       const dateObj = new Date(date + 'T00:00:00');
       const dateStr = dateObj.toLocaleDateString('de-AT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
-      // Show confirmation
       document.getElementById('booking-details').innerHTML =
         `<strong>Service:</strong> ${service}<br>` +
-        `<strong>Standort:</strong> ${standort}<br>` +
+        `<strong>Standort:</strong> ${selectedLoc}<br>` +
         `<strong>Datum:</strong> ${dateStr}<br>` +
-        `<strong>Uhrzeit:</strong> ${time} Uhr<br>` +
+        `<strong>Uhrzeit:</strong> ${selectedTime} Uhr<br>` +
         `<strong>Name:</strong> ${name}<br>` +
         (phone ? `<strong>Telefon:</strong> ${phone}<br>` : '') +
         (email ? `<strong>E-Mail:</strong> ${email}` : '');
@@ -3119,13 +3432,16 @@
       bookingFormView.style.display = 'none';
       bookingConfirmView.style.display = '';
 
-      // Reset form
+      // Reset
       document.getElementById('booking-service').value = '';
-      document.getElementById('booking-time').value = '';
       document.getElementById('booking-name').value = '';
       document.getElementById('booking-phone').value = '';
       document.getElementById('booking-email').value = '';
-      document.getElementById('booking-date').value = today;
+      dateInput.value = today;
+      selectedTime = '';
+      selectedLoc = 'City Barbershop';
+      document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.loc-pill').forEach((p, i) => p.classList.toggle('active', i === 0));
     }
 
     // Wire up all existing "Termin buchen" buttons to open the modal instead
