@@ -20,15 +20,16 @@
     }
 
     :root {
-      --taupe: oklch(40% 0.025 52);
-      --taupe-2: oklch(34% 0.022 52);
-      --cream: oklch(94% 0.012 65);
-      --cream-2: oklch(90% 0.018 65);
-      --amber: #c8a46e;
-      --amber-2: #b8944e;
-      --text-light: oklch(97% 0.006 65);
-      --text-dark: oklch(18% 0.018 52);
-      --divider: oklch(60% 0.02 55);
+      --taupe: #181818;
+      --taupe-2: #262626;
+      --cream: #ffffff;
+      --cream-2: #f5f5f5;
+      --amber: #dc3545;
+      --amber-2: #b91c1c;
+      --text-light: #ffffff;
+      --text-dark: #0f0f0f;
+      --divider: #333333;
+      --silver: #c0c0c0;
     }
 
     html {
@@ -38,7 +39,7 @@
     body {
       font-family: 'Barlow', sans-serif;
       overflow-x: hidden;
-      background: oklch(40% 0.025 52);
+      background: #181818;
       color: var(--text-dark);
     }
 
@@ -67,7 +68,7 @@
     }
 
     nav.solid {
-      background: oklch(34% 0.024 52 / 0.93);
+      background: rgba(26, 26, 26, 0.93);
       backdrop-filter: blur(14px);
     }
 
@@ -92,7 +93,7 @@
     }
 
     .nav-links a {
-      color: oklch(90% 0.01 65);
+      color: #f5f5f5;
       text-decoration: none;
       font-size: 0.82rem;
       font-weight: 400;
@@ -114,7 +115,7 @@
     }
 
     .nav-socials a {
-      color: oklch(88% 0.01 65);
+      color: #f0f0f0;
       text-decoration: none;
       opacity: 0.8;
       transition: opacity 0.2s, color 0.2s;
@@ -225,7 +226,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: oklch(60% 0.02 55);
+      color: #8f8f8f;
       margin-bottom: 0.5rem;
     }
 
@@ -235,12 +236,12 @@
       align-items: center;
       gap: 1rem;
       padding: 1.1rem 0;
-      border-top: 1px solid oklch(100% 0 0 / 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text-light);
     }
 
     .hero-price-row:last-of-type {
-      border-bottom: 1px solid oklch(100% 0 0 / 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .hero-price-name {
@@ -272,7 +273,7 @@
       align-items: center;
       gap: 0.5rem;
       background: var(--amber);
-      color: var(--text-dark);
+      color: #ffffff;
       border: none;
       padding: 0.75rem 2rem;
       font-family: 'Barlow Condensed', sans-serif;
@@ -342,7 +343,7 @@
 
     /* -- PREISE SECTION -- */
     #prices {
-      background: oklch(44% 0.025 52);
+      background: #262626;
       overflow: hidden;
     }
 
@@ -383,7 +384,7 @@
       justify-content: space-between;
       align-items: baseline;
       padding: 1rem 0;
-      border-bottom: 1px solid oklch(100% 0 0 / 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       will-change: transform, opacity;
     }
 
@@ -399,7 +400,7 @@
     }
 
     .price-item.featured .pi-desc {
-      color: oklch(72% 0.02 55);
+      color: #c0c0c0;
     }
 
     .price-item.featured .pi-price {
@@ -421,7 +422,7 @@
     .pi-desc {
       font-size: 0.78rem;
       font-weight: 300;
-      color: oklch(62% 0.018 55);
+      color: #a8a8a8;
       margin-top: 0.15rem;
       line-height: 1.4;
     }
@@ -442,7 +443,7 @@
 
     /* -- ABOUT -- */
     #about {
-      background: oklch(38% 0.024 52);
+      background: #2e2e2e;
       overflow: hidden;
     }
 
@@ -457,7 +458,7 @@
     }
 
     .about-text .section-label {
-      color: oklch(70% 0.1 78);
+      color: #dc3545;
     }
 
     .about-text .section-title {
@@ -469,13 +470,13 @@
       font-size: 1rem;
       font-weight: 300;
       line-height: 1.75;
-      color: oklch(82% 0.015 60);
+      color: #d1d5db;
       margin-bottom: 1.2rem;
     }
 
     .about-img-placeholder {
       aspect-ratio: 3/4;
-      background: oklch(45% 0.025 52);
+      background: #282828;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -496,7 +497,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: oklch(58% 0.02 52);
+      color: #999999;
       position: relative;
       z-index: 1;
     }
@@ -507,7 +508,7 @@
 
     /* -- GALLERY -- */
     #gallery {
-      background: oklch(42% 0.024 52);
+      background: #2e2e2e;
     }
 
     .gallery-inner {
@@ -545,12 +546,12 @@
       font-size: 0.6rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: oklch(60% 0.02 52);
+      color: #888888;
     }
 
     /* -- REVIEWS -- */
     #reviews {
-      background: oklch(46% 0.024 52);
+      background: #262626;
     }
 
     .reviews-inner {
@@ -559,17 +560,35 @@
       padding: 0 3rem;
     }
 
+    .reviews-carousel {
+      position: relative;
+      max-width: 880px;
+      margin: 1.8rem auto 0;
+    }
+
     .reviews-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 1.2rem;
-      margin-top: 1rem;
+      align-items: stretch;
     }
 
     .review-card {
-      background: oklch(42% 0.022 52);
-      padding: 1.5rem;
-      will-change: transform, opacity;
+      display: none;
+      background: #262626;
+      padding: 2rem 2.2rem;
+      min-width: 0;
+      animation: review-fade-in 0.5s ease both;
+    }
+
+    .review-card.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes review-fade-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
     }
 
     .review-card-spacer {
@@ -584,9 +603,9 @@
     }
 
     .review-avatar {
-      width: 38px;
-      height: 38px;
-      background: oklch(55% 0.025 52);
+      width: 44px;
+      height: 44px;
+      background: #6b6b6b;
       color: var(--text-light);
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
@@ -600,28 +619,28 @@
 
     .review-name {
       font-weight: 500;
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: var(--text-light);
     }
 
     .review-date {
       font-size: 0.68rem;
-      color: oklch(58% 0.02 52);
+      color: #999999;
       font-weight: 300;
     }
 
     .review-stars {
       margin-left: auto;
-      color: oklch(75% 0.12 80);
+      color: #ffcc00;
       font-size: 0.85rem;
       letter-spacing: 0.05em;
     }
 
     .review-text {
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       font-weight: 300;
-      color: oklch(78% 0.015 60);
-      line-height: 1.6;
+      color: #d4d4d4;
+      line-height: 1.65;
     }
 
     .reviews-cta {
@@ -630,15 +649,38 @@
       will-change: transform, opacity;
     }
 
+    .reviews-dots {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1.4rem;
+    }
+
+    .reviews-dot {
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      background: #666666;
+      transition: background 0.3s ease, width 0.3s ease;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+    }
+
+    .reviews-dot.active {
+      background: var(--amber);
+      width: 22px;
+    }
+
     /* -- STANDORTE -- */
     #standorte-wrapper {
       height: 300vh;
       position: relative;
-      background: oklch(36% 0.023 52);
+      background: #181818;
     }
 
     #standorte {
-      background: oklch(36% 0.023 52);
+      background: #181818;
       overflow: hidden;
     }
 
@@ -665,16 +707,18 @@
       width: 100%;
       height: 100%;
       will-change: transform, filter;
-      background: oklch(42% 0.024 52);
+      background: #2e2e2e;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       will-change: transform, opacity;
-      border: 1px solid oklch(50% 0.02 52 / 0.3);
+      border: 1px solid #2a3560;
     }
 
+    .standort-img { display: none; }
+
     .standort-img {
-      background: oklch(48% 0.025 52);
+      background: #303030;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -693,7 +737,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: oklch(58% 0.02 52);
+      color: #999999;
       position: relative;
       z-index: 1;
     }
@@ -701,7 +745,7 @@
     .standort-badge {
       display: inline-block;
       background: var(--amber);
-      color: var(--text-dark);
+      color: var(--text-light);
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
       font-size: 0.65rem;
@@ -715,28 +759,30 @@
     }
 
     .standort-body {
-      padding: 3rem;
+      padding: 2.2rem 2.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      min-height: 0;
+      overflow: hidden;
     }
 
     .standort-name {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
       text-transform: uppercase;
       color: var(--text-light);
       line-height: 1;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.1rem;
     }
 
     .standort-info {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 300;
-      color: oklch(78% 0.015 60);
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
+      color: #d4d4d4;
+      line-height: 1.7;
+      margin-bottom: 0.3rem;
     }
 
     .standort-info strong {
@@ -747,7 +793,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       margin-bottom: 0.2rem;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
 
     .standort-info strong:first-child {
@@ -755,7 +801,7 @@
     }
 
     .standort-cta {
-      margin-top: 2rem;
+      margin-top: 1.4rem;
     }
 
     .standort-dots {
@@ -769,7 +815,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: oklch(55% 0.02 52);
+      background: #666666;
       transition: background 0.3s, transform 0.3s;
     }
 
@@ -780,7 +826,7 @@
 
     /* -- CONTACT -- */
     #contact {
-      background: oklch(34% 0.022 52);
+      background: #262626;
     }
 
     .contact-inner {
@@ -799,7 +845,7 @@
     }
 
     .contact-text .section-label {
-      color: oklch(70% 0.1 78);
+      color: #dc3545;
     }
 
     .contact-info {
@@ -811,7 +857,7 @@
       align-items: flex-start;
       gap: 1rem;
       margin-bottom: 1.2rem;
-      color: oklch(82% 0.015 60);
+      color: #d1d5db;
       font-size: 0.95rem;
       font-weight: 300;
     }
@@ -827,7 +873,7 @@
     }
 
     .contact-info-row a {
-      color: oklch(82% 0.015 60);
+      color: #d1d5db;
       text-decoration: none;
     }
 
@@ -845,8 +891,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      border: 1px solid oklch(55% 0.02 52);
-      color: oklch(82% 0.015 60);
+      border: 1px solid #666666;
+      color: #d1d5db;
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -887,7 +933,7 @@
     .contact-booking p {
       font-size: 0.9rem;
       font-weight: 300;
-      color: oklch(72% 0.018 60);
+      color: #bfbfbf;
       line-height: 1.6;
     }
 
@@ -896,11 +942,11 @@
 
       0%,
       100% {
-        box-shadow: 0 0 8px oklch(80% 0.02 55 / 0.3), 0 0 20px oklch(70% 0.03 55 / 0.15);
+        box-shadow: 0 4px 20px rgba(220, 53, 69, 0.4), 0 2px 8px rgba(0, 0, 0, 0.4);
       }
 
       50% {
-        box-shadow: 0 0 18px oklch(85% 0.03 55 / 0.5), 0 0 45px oklch(75% 0.04 55 / 0.25);
+        box-shadow: 0 6px 32px rgba(220, 53, 69, 0.7), 0 2px 8px rgba(0, 0, 0, 0.4);
       }
     }
 
@@ -914,7 +960,7 @@
 
     /* -- FOOTER -- */
     footer {
-      background: oklch(24% 0.02 52);
+      background: #262626;
       padding: 2rem 3rem;
       display: flex;
       justify-content: space-between;
@@ -923,12 +969,12 @@
 
     footer p {
       font-size: 0.75rem;
-      color: oklch(50% 0.018 52);
+      color: #5d5d5d;
       letter-spacing: 0.08em;
     }
 
     footer a {
-      color: oklch(50% 0.018 52);
+      color: #5d5d5d;
       text-decoration: none;
     }
 
@@ -942,21 +988,31 @@
       bottom: 2rem;
       right: 2rem;
       z-index: 200;
-      background: var(--amber);
-      color: var(--text-dark);
+      background: linear-gradient(135deg, #dc3545 0%, #a8192a 100%);
+      color: #ffffff;
       border: none;
-      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      padding: 1.1rem 2.2rem 1.1rem 1.9rem;
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 4px 24px oklch(0% 0 0 / 0.4);
-      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(220, 53, 69, 0.45), 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       opacity: 0;
       pointer-events: none;
       will-change: transform;
+    }
+
+    .floating-cta::before {
+      content: '✂';
+      font-size: 1rem;
+      line-height: 1;
     }
 
     .floating-cta.active {
@@ -969,7 +1025,9 @@
     }
 
     .floating-cta:hover {
-      background: var(--amber-2);
+      background: linear-gradient(135deg, #e84455 0%, #c0202e 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(220, 53, 69, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
     /* -- BOOKING MODAL -- */
@@ -977,7 +1035,7 @@
       position: fixed;
       inset: 0;
       z-index: 300;
-      background: oklch(0% 0 0 / 0.6);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
@@ -993,7 +1051,7 @@
     }
 
     .booking-card {
-      background: oklch(36% 0.023 52);
+      background: #181818;
       color: var(--text-light);
       width: 90%;
       max-width: 480px;
@@ -1015,7 +1073,7 @@
       right: 1.2rem;
       background: none;
       border: none;
-      color: oklch(70% 0.01 55);
+      color: #d9d9d9;
       font-size: 1.5rem;
       cursor: pointer;
       line-height: 1;
@@ -1038,7 +1096,7 @@
 
     .booking-card .booking-subtitle {
       font-size: 0.82rem;
-      color: oklch(70% 0.015 55);
+      color: #dbdbdb;
       margin-bottom: 1.8rem;
       letter-spacing: 0.04em;
     }
@@ -1053,7 +1111,7 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: oklch(70% 0.015 55);
+      color: #dbdbdb;
       margin-bottom: 0.4rem;
     }
 
@@ -1064,8 +1122,8 @@
       font-family: 'Barlow', sans-serif;
       font-size: 0.9rem;
       color: var(--text-light);
-      background: oklch(30% 0.02 52);
-      border: 1px solid oklch(50% 0.02 52);
+      background: #363636;
+      border: 1px solid #595959;
       outline: none;
       transition: border-color 0.2s;
       appearance: none;
@@ -1086,7 +1144,7 @@
     }
 
     .booking-field input::placeholder {
-      color: oklch(50% 0.015 52);
+      color: #5a5a5a;
     }
 
     .booking-row {
@@ -1153,14 +1211,14 @@
 
     .booking-confirmation p {
       font-size: 0.88rem;
-      color: oklch(70% 0.015 55);
+      color: #dbdbdb;
       line-height: 1.6;
     }
 
     .booking-confirmation .booking-details {
       margin: 1.2rem 0;
       padding: 1rem;
-      background: oklch(30% 0.02 52);
+      background: #363636;
       text-align: left;
       font-size: 0.82rem;
       line-height: 1.8;
@@ -1245,7 +1303,7 @@
       position: fixed;
       inset: 0;
       z-index: 105;
-      background: oklch(24% 0.02 52 / 0.97);
+      background: rgba(25, 25, 25, 0.97);
       backdrop-filter: blur(20px);
       flex-direction: column;
       align-items: center;
@@ -1290,7 +1348,7 @@
     }
 
     .mobile-nav-links a {
-      color: oklch(85% 0.01 65);
+      color: #ebebeb;
       text-decoration: none;
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
@@ -1319,7 +1377,7 @@
     }
 
     .mobile-nav-socials a {
-      color: oklch(70% 0.01 65);
+      color: #e0e0e0;
       transition: color 0.2s;
     }
 
@@ -1401,7 +1459,7 @@
         position: absolute;
         left: 0; right: 0; top: 0;
         height: 26%;
-        background: linear-gradient(to bottom, oklch(22% 0.02 52 / 0.55) 0%, transparent 100%);
+        background: linear-gradient(to bottom, rgba(20, 20, 20, 0.55) 0%, transparent 100%);
         z-index: 1;
         pointer-events: none;
       }
@@ -1413,9 +1471,9 @@
         left: 0; right: 0; bottom: 0;
         height: 38%;
         background: linear-gradient(to top,
-          oklch(24% 0.02 52 / 0.97) 0%,
-          oklch(27% 0.02 52 / 0.82) 40%,
-          oklch(30% 0.02 52 / 0.35) 75%,
+          rgba(25, 25, 25, 0.97) 0%,
+          rgba(30, 30, 30, 0.82) 40%,
+          rgba(32, 32, 32, 0.35) 75%,
           transparent 100%
         );
         z-index: 3;
@@ -1432,11 +1490,11 @@
         transform: none;
         z-index: 4;
         padding: 1rem;
-        background: oklch(27% 0.02 52 / 0.86);
-        border: 1px solid oklch(100% 0 0 / 0.12);
+        background: rgba(30, 30, 30, 0.86);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 8px;
         backdrop-filter: blur(18px);
-        box-shadow: 0 18px 40px oklch(0% 0 0 / 0.28);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
       }
 
       /* Show only 2 anchor prices on mobile — entry + premium */
@@ -1566,96 +1624,57 @@
         aspect-ratio: 16/8;
       }
 
-      /* --- REVIEWS — stable stacked mobile cards --- */
+      /* --- REVIEWS — auto-rotating carousel --- */
       .reviews-inner {
-        padding: 0 1.4rem;
-        overflow: visible;
+        padding: 0;
       }
 
       .reviews-inner .section-label,
       .reviews-inner .section-title {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 1.4rem;
+        padding-right: 1.4rem;
+      }
+
+      .reviews-carousel {
+        max-width: 100%;
+        margin: 1rem 1.4rem 0;
       }
 
       .reviews-grid {
-        display: grid;
         grid-template-columns: 1fr;
-        width: 100%;
-        overflow: visible;
-        scroll-snap-type: none;
-        overscroll-behavior-x: auto;
-        touch-action: auto;
-        gap: 0.75rem;
-        margin-top: 1rem;
-        padding: 0;
-        scroll-padding-left: 0;
-        scroll-padding-right: 0;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+        gap: 0;
       }
-
-      .reviews-grid::-webkit-scrollbar { display: none; }
 
       .review-card {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        overflow: visible;
-        scroll-snap-align: none;
-        scroll-snap-stop: normal;
-        padding: 1.25rem;
-        background: oklch(40% 0.022 52);
-        margin: 0;
+        padding: 1.4rem 1.4rem;
       }
 
-      .review-card:last-child {
-        margin-right: 0;
+      .review-text {
+        overflow-wrap: break-word;
       }
 
-      .review-card-spacer {
-        display: none;
+      .reviews-dots {
+        padding: 0.2rem 0;
+        margin-top: 1.1rem;
       }
 
       .review-name { font-size: 0.93rem; }
-      .review-text {
-        font-size: 0.9rem;
-        line-height: 1.65;
-        overflow-wrap: break-word;
-        word-break: normal;
-      }
-
-      .review-header {
-        gap: 0.7rem;
-        flex-wrap: nowrap;
-      }
-
-      .review-stars {
-        width: auto;
-        margin-left: auto;
-        white-space: nowrap;
-      }
-
+      .review-text { font-size: 0.9rem; line-height: 1.65; }
+      .review-header { gap: 0.7rem; }
       .review-avatar { width: 36px; height: 36px; font-size: 0.88rem; }
 
       .reviews-cta {
-        padding: 0;
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
+        padding: 0 1.4rem;
+        margin-top: 1.5rem;
       }
 
       .reviews-cta a.btn-book {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
+        display: block;
         text-align: center;
-        width: auto;
-        padding: 1rem 2rem;
-        background: var(--amber);
-        color: var(--text-dark);
-        font-size: 0.9rem;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
       }
 
       /* --- STANDORTE — horizontal swipe carousel --- */
@@ -1700,8 +1719,8 @@
         grid-template-columns: 1fr;
         scroll-snap-align: start;
         scroll-snap-stop: always;
-        background: oklch(40% 0.024 52);
-        border: 1px solid oklch(55% 0.02 52 / 0.25);
+        background: #252525;
+        border: 1px solid #333333;
         margin: 0;
         opacity: 1 !important;
         transform: none !important;
@@ -1796,7 +1815,7 @@
         letter-spacing: 0.12em;
         padding: 0.85rem 1.4rem;
         border-radius: 999px;
-        box-shadow: 0 6px 20px oklch(0% 0 0 / 0.4);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
       }
 
       /* --- BOOKING MODAL — bottom sheet --- */
@@ -1817,7 +1836,7 @@
         display: block;
         width: 36px;
         height: 4px;
-        background: oklch(55% 0.02 52);
+        background: #666666;
         border-radius: 2px;
         margin: 1.2rem auto 1.4rem;
       }
@@ -2090,14 +2109,14 @@
         </div>
         <div class="about-img-placeholder">
           <svg viewBox="0 0 400 533" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="533" fill="oklch(45% 0.025 52)" />
-            <line x1="0" y1="0" x2="400" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1" />
-            <line x1="0" y1="133" x2="400" y2="666" stroke="oklch(50% 0.022 52)" stroke-width="1" />
-            <line x1="0" y1="266" x2="400" y2="799" stroke="oklch(50% 0.022 52)" stroke-width="1" />
-            <line x1="0" y1="400" x2="400" y2="933" stroke="oklch(50% 0.022 52)" stroke-width="1" />
-            <line x1="100" y1="0" x2="500" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1" />
-            <line x1="200" y1="0" x2="600" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1" />
-            <line x1="300" y1="0" x2="700" y2="533" stroke="oklch(50% 0.022 52)" stroke-width="1" />
+            <rect width="400" height="533" fill="#282828" />
+            <line x1="0" y1="0" x2="400" y2="533" stroke="#626262" stroke-width="1" />
+            <line x1="0" y1="133" x2="400" y2="666" stroke="#626262" stroke-width="1" />
+            <line x1="0" y1="266" x2="400" y2="799" stroke="#626262" stroke-width="1" />
+            <line x1="0" y1="400" x2="400" y2="933" stroke="#626262" stroke-width="1" />
+            <line x1="100" y1="0" x2="500" y2="533" stroke="#626262" stroke-width="1" />
+            <line x1="200" y1="0" x2="600" y2="533" stroke="#626262" stroke-width="1" />
+            <line x1="300" y1="0" x2="700" y2="533" stroke="#626262" stroke-width="1" />
           </svg>
           <span>Team-Foto</span>
         </div>
@@ -2111,41 +2130,29 @@
         <h2 class="section-title">Galerie</h2>
         <div class="gallery-grid">
           <div class="gallery-item"><svg viewBox="0 0 400 400">
-              <rect width="400" height="400" fill="oklch(88% 0.015 62)" />
-              <line x1="0" y1="0" x2="400" y2="400" stroke="oklch(80% 0.018 62)" stroke-width="1" />
-              <line x1="100" y1="0" x2="400" y2="300" stroke="oklch(80% 0.018 62)" stroke-width="1" />
-              <line x1="0" y1="100" x2="300" y2="400" stroke="oklch(80% 0.018 62)" stroke-width="1" />
+              <rect width="400" height="400" fill="#f0f0f0" />
+              <line x1="0" y1="0" x2="400" y2="400" stroke="#cdd5e0" stroke-width="1" />
+              <line x1="100" y1="0" x2="400" y2="300" stroke="#cdd5e0" stroke-width="1" />
+              <line x1="0" y1="100" x2="300" y2="400" stroke="#cdd5e0" stroke-width="1" />
             </svg><span>Foto 1</span></div>
           <div class="gallery-item"><svg viewBox="0 0 400 400">
-              <rect width="400" height="400" fill="oklch(86% 0.015 62)" />
-              <line x1="0" y1="0" x2="400" y2="400" stroke="oklch(78% 0.018 62)" stroke-width="1" />
-              <line x1="100" y1="0" x2="400" y2="300" stroke="oklch(78% 0.018 62)" stroke-width="1" />
-              <line x1="0" y1="100" x2="300" y2="400" stroke="oklch(78% 0.018 62)" stroke-width="1" />
+              <rect width="400" height="400" fill="#ececec" />
+              <line x1="0" y1="0" x2="400" y2="400" stroke="#cfcfcf" stroke-width="1" />
+              <line x1="100" y1="0" x2="400" y2="300" stroke="#cfcfcf" stroke-width="1" />
+              <line x1="0" y1="100" x2="300" y2="400" stroke="#cfcfcf" stroke-width="1" />
             </svg><span>Foto 2</span></div>
           <div class="gallery-item"><svg viewBox="0 0 400 400">
-              <rect width="400" height="400" fill="oklch(90% 0.015 62)" />
-              <line x1="0" y1="0" x2="400" y2="400" stroke="oklch(82% 0.018 62)" stroke-width="1" />
-              <line x1="100" y1="0" x2="400" y2="300" stroke="oklch(82% 0.018 62)" stroke-width="1" />
-              <line x1="0" y1="100" x2="300" y2="400" stroke="oklch(82% 0.018 62)" stroke-width="1" />
+              <rect width="400" height="400" fill="#f5f5f5" />
+              <line x1="0" y1="0" x2="400" y2="400" stroke="#d8d8d8" stroke-width="1" />
+              <line x1="100" y1="0" x2="400" y2="300" stroke="#d8d8d8" stroke-width="1" />
+              <line x1="0" y1="100" x2="300" y2="400" stroke="#d8d8d8" stroke-width="1" />
             </svg><span>Foto 3</span></div>
           <div class="gallery-item"><svg viewBox="0 0 400 400">
-              <rect width="400" height="400" fill="oklch(87% 0.015 62)" />
-              <line x1="0" y1="0" x2="400" y2="400" stroke="oklch(79% 0.018 62)" stroke-width="1" />
-              <line x1="100" y1="0" x2="400" y2="300" stroke="oklch(79% 0.018 62)" stroke-width="1" />
-              <line x1="0" y1="100" x2="300" y2="400" stroke="oklch(79% 0.018 62)" stroke-width="1" />
+              <rect width="400" height="400" fill="#eeeeee" />
+              <line x1="0" y1="0" x2="400" y2="400" stroke="#d3d3d3" stroke-width="1" />
+              <line x1="100" y1="0" x2="400" y2="300" stroke="#d3d3d3" stroke-width="1" />
+              <line x1="0" y1="100" x2="300" y2="400" stroke="#d3d3d3" stroke-width="1" />
             </svg><span>Foto 4</span></div>
-          <div class="gallery-item"><svg viewBox="0 0 400 400">
-              <rect width="400" height="400" fill="oklch(89% 0.015 62)" />
-              <line x1="0" y1="0" x2="400" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1" />
-              <line x1="100" y1="0" x2="400" y2="300" stroke="oklch(81% 0.018 62)" stroke-width="1" />
-              <line x1="0" y1="100" x2="300" y2="400" stroke="oklch(81% 0.018 62)" stroke-width="1" />
-            </svg><span>Foto 5</span></div>
-          <div class="gallery-item"><svg viewBox="0 0 400 400">
-              <rect width="400" height="400" fill="oklch(85% 0.015 62)" />
-              <line x1="0" y1="0" x2="400" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1" />
-              <line x1="100" y1="0" x2="400" y2="300" stroke="oklch(77% 0.018 62)" stroke-width="1" />
-              <line x1="0" y1="100" x2="300" y2="400" stroke="oklch(77% 0.018 62)" stroke-width="1" />
-            </svg><span>Foto 6</span></div>
         </div>
       </div>
     </section>
@@ -2155,6 +2162,7 @@
       <div class="reviews-inner">
         <p class="section-label">Kundenstimmen</p>
         <h2 class="section-title">Was unsere<br>Kunden sagen</h2>
+        <div class="reviews-carousel">
         <div class="reviews-grid">
           <div class="review-card">
             <div class="review-header">
@@ -2226,8 +2234,9 @@
             <p class="review-text">Immer pünktlich, immer freundlich, immer ein perfektes Ergebnis. Was will man mehr?
             </p>
           </div>
-          <div class="review-card review-card-spacer" aria-hidden="true"></div>
         </div>
+        </div>
+        <div class="reviews-dots" id="reviews-dots"></div>
         <div class="reviews-cta">
           <a href="https://www.google.com/search?q=mister+m+friseur+wien+bewertungen" target="_blank"
             class="btn-book">Bewertung schreiben &#9998;</a>
@@ -2247,9 +2256,9 @@
               <div class="standort-img">
                 <div class="standort-badge">Standort 1</div>
                 <svg viewBox="0 0 600 500">
-                  <rect width="600" height="500" fill="oklch(48% 0.025 52)" />
-                  <line x1="0" y1="0" x2="600" y2="500" stroke="oklch(52% 0.022 52)" stroke-width="1" />
-                  <line x1="200" y1="0" x2="600" y2="333" stroke="oklch(52% 0.022 52)" stroke-width="1" />
+                  <rect width="600" height="500" fill="#2f2f2f" />
+                  <line x1="0" y1="0" x2="600" y2="500" stroke="#666666" stroke-width="1" />
+                  <line x1="200" y1="0" x2="600" y2="333" stroke="#666666" stroke-width="1" />
                 </svg>
                 <span>Foto Standort 1</span>
               </div>
@@ -2272,9 +2281,9 @@
               <div class="standort-img">
                 <div class="standort-badge">Standort 2</div>
                 <svg viewBox="0 0 600 500">
-                  <rect width="600" height="500" fill="oklch(48% 0.025 52)" />
-                  <line x1="0" y1="0" x2="600" y2="500" stroke="oklch(52% 0.022 52)" stroke-width="1" />
-                  <line x1="200" y1="0" x2="600" y2="333" stroke="oklch(52% 0.022 52)" stroke-width="1" />
+                  <rect width="600" height="500" fill="#2f2f2f" />
+                  <line x1="0" y1="0" x2="600" y2="500" stroke="#666666" stroke-width="1" />
+                  <line x1="200" y1="0" x2="600" y2="333" stroke="#666666" stroke-width="1" />
                 </svg>
                 <span>Foto Standort 2</span>
               </div>
@@ -2501,6 +2510,104 @@
       return window.innerWidth <= 768;
     }
 
+    // -- Reviews auto-rotating carousel --
+    (function () {
+      const viewport = document.querySelector('.reviews-carousel');
+      const track = document.querySelector('.reviews-grid');
+      const dotsEl = document.getElementById('reviews-dots');
+      const cards = Array.from(document.querySelectorAll('.review-card'));
+      if (!viewport || !track || !dotsEl || !cards.length) return;
+
+      cards.forEach(c => { c.style.opacity = ''; c.style.transform = ''; });
+      track.style.transform = '';
+
+      const INTERVAL = 3000;
+      let index = 0;
+      let timer = null;
+      let pages = 1;
+
+      function perView() {
+        return (typeof isMobile === 'function' ? isMobile() : window.innerWidth < 768) ? 1 : 2;
+      }
+
+      function rebuildDots() {
+        pages = Math.ceil(cards.length / perView());
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < pages; i++) {
+          const d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'reviews-dot';
+          d.setAttribute('aria-label', 'Seite ' + (i + 1));
+          d.addEventListener('click', () => { goTo(i); restart(); });
+          dotsEl.appendChild(d);
+        }
+        if (index >= pages) index = 0;
+        applyTransform();
+      }
+
+      function applyTransform() {
+        const pv = perView();
+        const start = index * pv;
+        cards.forEach((c, i) => {
+          const shouldShow = i >= start && i < start + pv;
+          if (shouldShow && !c.classList.contains('active')) {
+            c.classList.add('active');
+            c.style.animation = 'none';
+            void c.offsetWidth;
+            c.style.animation = '';
+          } else if (!shouldShow) {
+            c.classList.remove('active');
+          }
+        });
+        Array.from(dotsEl.children).forEach((d, j) => d.classList.toggle('active', j === index));
+      }
+
+      function goTo(i) {
+        index = (i + pages) % pages;
+        applyTransform();
+      }
+
+      function next() { goTo(index + 1); }
+
+      function start() {
+        stop();
+        timer = setInterval(next, INTERVAL);
+      }
+      function stop() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+      function restart() { start(); }
+
+      viewport.addEventListener('mouseenter', stop);
+      viewport.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop(); else start();
+      });
+
+      // Touch swipe support
+      let touchStartX = null;
+      viewport.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        stop();
+      }, { passive: true });
+      viewport.addEventListener('touchend', (e) => {
+        if (touchStartX === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) goTo(index + (dx < 0 ? 1 : -1));
+        touchStartX = null;
+        start();
+      });
+
+      rebuildDots();
+      start();
+
+      let resizeTimer = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(rebuildDots, 150);
+      });
+    })();
+
     // -- Entrance animations --
     const heroFace = document.getElementById('hero-face');
     const heroPriceList = document.getElementById('hero-price-list');
@@ -2712,19 +2819,6 @@
           const p = clamp01((rp - 0.3) * 2.5);
           el.style.opacity = p;
           el.style.transform = `translateY(${(1 - p) * 30}px)`;
-        });
-        const reviewCards = document.querySelectorAll('.review-card');
-        reviewCards.forEach((el, i) => {
-          const adjusted = clamp01((rp - 0.35) / 0.6);
-          const p = stagger(adjusted, i, reviewCards.length, 0.5);
-          if (isMobile()) {
-            el.style.opacity = p;
-            el.style.transform = `translateY(${(1 - p) * 20}px)`;
-          } else {
-            const dir = i % 2 === 0 ? -1 : 1;
-            el.style.opacity = p;
-            el.style.transform = `translateX(${(1 - p) * dir * 60}px)`;
-          }
         });
         const reviewsCta = document.querySelector('.reviews-cta');
         if (reviewsCta) {
