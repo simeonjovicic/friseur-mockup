@@ -219,6 +219,19 @@
       animation: headIn 1s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
+    #hero-spotlight {
+      position: absolute;
+      bottom: 10%;
+      left: 8%;
+      width: 55vw;
+      max-width: 800px;
+      aspect-ratio: 1 / 1;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 65%);
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
     #hero-face {
       position: absolute;
       bottom: 0;
@@ -1675,6 +1688,13 @@
         opacity: 0.92;
       }
 
+      #hero-spotlight {
+        left: auto;
+        right: -15vw;
+        bottom: 25%;
+        width: 120vw;
+      }
+
       /* Face image — positioned as a brand visual, not as a competing content block */
       #hero-face {
         left: auto;
@@ -2210,6 +2230,7 @@
       <p class="hero-tagline">Dein Friseur in Wien · 2 Standorte</p>
     </div>
 
+    <div id="hero-spotlight"></div>
     <img id="hero-face" src="emrah1.png" alt="City Barbershop" />
 
     <div id="hero-price-list">
